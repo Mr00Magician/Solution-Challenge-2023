@@ -99,7 +99,7 @@ body {
 }
 
 .form__input-error-message {
-  margin-top: 0.5rem;
+  margin: auto;
   font-size: 0.85rem;
   color: var(--color-error);
 }

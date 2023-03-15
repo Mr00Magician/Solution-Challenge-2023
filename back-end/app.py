@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, url_for, redirect
 
 app = Flask(__name__)
 
@@ -11,17 +11,19 @@ users = {
 def home_page():
     return render_template('login.html')
 
-@app.route('/login')
+@app.route('/login', methods = ['POST'])
 def login():
-    username = request.args.get('username')
-    password = request.args.get('password')
+    username = request.form.get('username')
+    password = request.form.get('password')
+    # print(request.form)
+    return jsonify(request.form)
     try:
         if users[username] == password:
             return render_template('index.html')
         else:
-            return '<h1>Wrong Password</h1>'
+            return render_template('login.html', error_message = 'Invalid Password')
     except:
-        return '<h1>Username does not exist</h1>'
+        return render_template('login.html', error_message = 'Invalid Username')
 
 # @app.route('/ideasboard.html')
 # def ideasboard():
