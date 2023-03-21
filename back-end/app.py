@@ -12,10 +12,10 @@ firebase_config = {
     'databaseURL': "https://ideaverse-80ef2-default-rtdb.firebaseio.com/"
 }
 firebase = initialize_app(firebase_config)
+
 auth = firebase.auth()
 db = firebase.database()
-
-# user = auth.sign_in_with_email_and_password('meanasnadeem@gmail.com', '123456')
+storage = firebase.storage()
 
 app = Flask(__name__)
 
@@ -60,6 +60,8 @@ value = {
     }
 }'''
 
+current_user = ''
+
 @app.route("/")
 def login_page():
     return render_template('login.html', value = value)
@@ -70,6 +72,8 @@ def create_account_page():
 
 @app.route('/create-account/sign-up', methods = ['POST'])
 def create_account():
+    global current_user
+
     value['email'] = email = request.form.get('email') 
     value['username'] = username = request.form.get('username')
     value['password'] = password = request.form.get('password')
@@ -92,24 +96,34 @@ def create_account():
                     error_message = 'Password should not be more than 30 characters',
                     value = value
                 )
-    auth.create_user_with_email_and_password(email, password)
-    auth.update_profile(display_name=username)
+    
+    current_user = auth.create_user_with_email_and_password(email, password)
+    current_user['displayName'] = username
+    auth.update_profile(current_user['idToken'], display_name=username, photo_url = storage.child('no-profile-image.png').get_url(None))
+    
+    db.child('users_info').child('users').child(username).set({'username':username, 'email':email})
+    tot_users = db.child('users_info').child('total_users').get().val()
+    db.child('users_info').child('total_users').set(tot_users + 1)
+
+    return redirect(url_for('home_page'))
 
 @app.route('/login', methods = ['POST'])
 def login():
+    global current_user
+    
     value['email'] = email = request.form.get('email')
     value['password'] = password = request.form.get('password')
 
-    user = ''
     try:
-        user = auth.sign_in_with_email_and_password(email, password)
+        current_user = auth.sign_in_with_email_and_password(email, password)
         return redirect(url_for('home_page'))
     except Exception as e:
         return render_template('login.html', error_message = 'Invalid email/password combination', value = value)
     
 @app.route('/home')
 def home_page():
-    return render_template('index.html')
+    print(current_user)
+    return render_template('index.html', user = current_user)
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)
