@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from pyrebase import initialize_app
 
 firebase_config = {
@@ -118,12 +118,25 @@ def login():
         current_user = auth.sign_in_with_email_and_password(email, password)
         return redirect(url_for('home_page'))
     except Exception as e:
+        # change this to redirect
         return render_template('login.html', error_message = 'Invalid email/password combination', value = value)
     
 @app.route('/home')
 def home_page():
-    print(current_user)
+    # print(current_user)
     return render_template('index.html', user = current_user)
+
+@app.route('/home/ideasboard')
+def ideasboard():
+    return render_template('ideasboard.html', user = current_user)
+
+@app.route('/home/ideasboard/submit-idea', methods = ['POST'])
+def submit_idea():
+    # print(request.json)
+    title = request.json['title']
+    description = request.json['description']
+    
+    return jsonify(request.json)
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)
