@@ -61,8 +61,6 @@
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
           <li class="dropdown"><a href="#"><span>Create</span> <i
                 class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
@@ -72,8 +70,13 @@
               <li><a href="#">Browse ideas</a></li>
             </ul>
           </li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a class="get-a-quote" href="get-a-quote.html">Get a Quote</a></li>
+          <li class="dropdown"><a href="#"><span>{{user['displayName']}}</span> <i
+                class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="#">View Profile</a></li>
+              <li><a href="#">Log Out</a></li>
+            </ul>
+          </li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -86,7 +89,7 @@
     <div class="container">
       <br class="row gy-4 d-flex justify-content-between">
       <br class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-      <h2 data-aos="fade-up">Welcome to Website!!</h2>
+      <h2 data-aos="fade-up">Welcome to IdeaVerse!!</h2>
       <p class="next" data-aos="fade-up" data-aos-delay="100">A platform where you can collaborate with others to work
         on an idea!</p>
       <br></br>
@@ -229,7 +232,7 @@
               <h4 class="title">Post an Idea</h4>
               <p class="description">Got an idea? Looking for people with the right skills? Form a team with people of right
                 skillset</p>
-              <a href="ideasboard.html" class="readmore stretched-link"><span>Learn More</span><i
+              <a href="./home/ideasboard" class="readmore stretched-link"><span>Learn More</span><i
                   class="bi bi-arrow-right"></i></a>
             </div>
           </div>
