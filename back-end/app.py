@@ -17,7 +17,7 @@ auth = firebase.auth()
 db = firebase.database()
 storage = firebase.storage()
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder = '../front-end/templates', static_folder = '../front-end/static')
 
 value = {
     'email': '',
