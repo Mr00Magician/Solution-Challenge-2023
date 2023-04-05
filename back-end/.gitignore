@@ -1,2 +1,4 @@
 /develop_env
 firebase_tester.py
+.env
+ServiceAccountPrivateKey.json
