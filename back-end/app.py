@@ -130,10 +130,24 @@ def ideasboard():
 @app.route('/home/ideasboard/submit-idea', methods = ['POST'])
 def submit_idea():
     # print(request.json)
-    title = request.json['title']
-    description = request.json['description']
+    try:
+        title:str = request.json['title']
+        description:str = request.json['description']
+        tags:list = request.json['tags']
+        users:list = request.json['users']
+    except Exception as e:
+        return jsonify({
+            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred!')),
+        })
     
-    return jsonify(request.json)
+    return jsonify({
+            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'Idea Submitted Successfully!')),
+        })
+
+@app.route('/home/ideasboard/submit-idea/result/<message>')
+def idea_submission_result(message = ''):
+    # return render_template('idea-submission-result.html', message = message)
+    return f'<h1> message = {message} </h1>'
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)
