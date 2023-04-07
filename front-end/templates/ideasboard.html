@@ -21,6 +21,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
   <!-- Vendor CSS Files -->
@@ -45,40 +46,46 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+  <div class="nav">
+    <input type="checkbox" id="nav-check">
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="../static/assets/img/logo.png" alt=""> -->
-        <h1>Logis</h1>
-      </a>
 
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li class="dropdown"><a href="#"><span>{{user['displayName']}}</span> <i
-            class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="#">View Profile</a></li>
-              <li><a href="#">Log Out</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav><!-- .navbar -->
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="ideasboard.html">Ideas</a>
+      <a href="contact.html">Contact</a>
 
     </div>
-  </header><!-- End Header -->
-  <!-- End Header -->
+    <div>
+      <div class="nav-user">
+        <a href="#" class="nav-user-icon"><i class="fa fa-user" style="color: white;"></i></a>
+        <div class="nav-user-dropdown">
+          <div id="Username">
+            <a href="#"><img src="../static/assets/img/penguin_profile.png" style="font-size: 20px"> UserName</a>
+          </div>
+          <hr style="color: #454548; margin: 0px;">
+          <a href="#"><i class="fa fa-user"></i> Profile</a>
+
+          <a href="#"><i class="fa fa-cog"></i> Settings</a>
+          <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  </div>
 
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center" style="background-image: url('../static/assets/img/background.jpg');">
+      <div class="page-header d-flex align-items-center"
+        style="background-image: url('../static/assets/img/background.jpg');">
         <div class="container position-relative">
           <div class="row d-flex justify-content-center">
             <div class="col-lg-6 text-center">
@@ -106,9 +113,7 @@
 
     <!-- Bootstrap CSS -->
 
-    <div class="sign">
-      <span class="fast-flicker">C</span>rea<span class="flicker">t</span>e
-    </div>
+
     <div class="container2">
       <form id="idea-submission-form">
         <h4
@@ -124,14 +129,24 @@
         </div>
         <div class="form-group">
           <label for="tags">Tags:</label>
-          <textarea class="form-control" id="tags" name="tags" rows="1"></textarea>
+          <div class="tag-container">
+            <label for="tag-select">Select a domain:</label>
+            <select id="tag-select">
+              <option value="1">Python</option>
+              <option value="2">JavaScript</option>
+              <option value="3">HTML</option>
+              <option value="4">CSS</option>
+            </select>
+            <button id="add-member">Add </button>
+          </div>
+          <div id="tag-list"></div>
         </div>
         <div class="form-group">
           <label for="team members">Team Members:</label>
           <table>
             <thead>
               <tr>
-                <th>Username</th>
+                <th>Username   </th>
               </tr>
             </thead>
             <tbody id="team-members">
@@ -142,13 +157,15 @@
                   <input type="text" id="member-name" placeholder="Username">
                 </td>
                 <td>
-                  <button type="button" id="add-member">Add</button>
+                  <button type="button" id="add-member2">Add</button>
                 </td>
               </tr>
             </tfoot>
           </table>
+
         </div>
-        <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+        <br>
+        <button type="submit" id="submitbutton">Submit</button><br><br><br>
       </form>
 
 
@@ -157,212 +174,53 @@
 
 
       <style>
+        #tag-select{
+          width: 210px;
+          height:45px;
+          font-size: 15px;
+        }
+
+
+        #add-member {
+          width: 90px;
+          height: 32px;
+          padding: 0%;
+          
+
+        }
+        #add-member2 {
+          width: 90px;
+          height: 32px;
+          padding: 0%;
+          margin-left:20px;
+
+        }
+
+        #submitbutton {
+
+
+          background-color: rgb(255, 255, 255);
+          color: rgb(60, 137, 158);
+          border: 2px solid rgb(111, 180, 199);
+          border-radius: 20px;
+          width: 170px;
+          font-size: 15px;
+          font-weight: 5px;
+          height: 40px;
+        }
+        
+
+
         @font-face {
           font-family: Clip;
           src: url("https://acupoftee.github.io/fonts/Clip.ttf");
         }
 
         body {
-          background-color: #141114;
-
-          background-size: 58px 58px;
-          background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+          overflow-x: hidden;
         }
 
-        .sign {
-          position: absolute;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 30%;
-          height: 30%;
 
-          transform: translate(-50%, -50%);
-          letter-spacing: 2;
-          left: 90%;
-          top: 65%;
-          font-family: "Clip";
-
-          font-size: 30px;
-          color: #0f0b1f;
-          text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #070330,
-            -0.2rem 0.1rem 1rem #2b219d, 0.2rem 0.1rem 1rem #000000,
-            0 -0.5rem 2rem #1b1a24, 0 0.5rem 3rem #372795;
-          animation: shine 2s forwards, flicker 3s infinite;
-        }
-
-        @keyframes blink {
-
-          0%,
-          22%,
-          36%,
-          75% {
-            color: #0a0721;
-            text-shadow: 0 0 0.6rem #8c88d8, 0 0 1.5rem #060511,
-              -0.2rem 0.1rem 1rem #453b56, 0.2rem 0.1rem 1rem #392b73,
-              0 -0.5rem 2rem #35383f, 0 0.5rem 3rem #2d2941;
-          }
-
-          28%,
-          33% {
-            color: #1b172a;
-            text-shadow: none;
-          }
-
-          82%,
-          97% {
-            color: #29282b;
-            text-shadow: none;
-          }
-        }
-
-        .flicker {
-          animation: shine 2s forwards, blink 3s 2s infinite;
-        }
-
-        .fast-flicker {
-          animation: shine 2s forwards, blink 10s 1s infinite;
-        }
-
-        @keyframes shine {
-          0% {
-            color: #02010d;
-            text-shadow: none;
-          }
-
-          100% {
-            color: #ffe6ff;
-            text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #575379,
-              -0.2rem 0.1rem 1rem #595464, 0.2rem 0.1rem 1rem #1b1839,
-              0 -0.5rem 2rem #191a27, 0 0.5rem 3rem #252030;
-          }
-        }
-
-        @keyframes flicker {
-          from {
-            opacity: 1;
-          }
-
-          4% {
-            opacity: 0.9;
-          }
-
-          6% {
-            opacity: 0.85;
-          }
-
-          8% {
-            opacity: 0.95;
-          }
-
-          10% {
-            opacity: 0.9;
-          }
-
-          11% {
-            opacity: 0.922;
-          }
-
-          12% {
-            opacity: 0.9;
-          }
-
-          14% {
-            opacity: 0.95;
-          }
-
-          16% {
-            opacity: 0.98;
-          }
-
-          17% {
-            opacity: 0.9;
-          }
-
-          19% {
-            opacity: 0.93;
-          }
-
-          20% {
-            opacity: 0.99;
-          }
-
-          24% {
-            opacity: 1;
-          }
-
-          26% {
-            opacity: 0.94;
-          }
-
-          28% {
-            opacity: 0.98;
-          }
-
-          37% {
-            opacity: 0.93;
-          }
-
-          38% {
-            opacity: 0.5;
-          }
-
-          39% {
-            opacity: 0.96;
-          }
-
-          42% {
-            opacity: 1;
-          }
-
-          44% {
-            opacity: 0.97;
-          }
-
-          46% {
-            opacity: 0.94;
-          }
-
-          56% {
-            opacity: 0.9;
-          }
-
-          58% {
-            opacity: 0.9;
-          }
-
-          60% {
-            opacity: 0.99;
-          }
-
-          68% {
-            opacity: 1;
-          }
-
-          70% {
-            opacity: 0.9;
-          }
-
-          72% {
-            opacity: 0.95;
-          }
-
-          93% {
-            opacity: 0.93;
-          }
-
-          95% {
-            opacity: 0.95;
-          }
-
-          97% {
-            opacity: 0.93;
-          }
-
-          to {
-            opacity: 1;
-          }
-        }
 
         .container2 {
           background-color: #f7f7f7;
@@ -391,21 +249,39 @@
         label {
           color: #8e6e6e;
         }
+
+        #add-member:before {
+          content: none;
+        }
+        #submitbutton:before{
+          content:none;
+        }
+
+
         button {
-          width:90px;
-  background-color: #4eb5e5;
-  color: #fff;
-  height:39px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  box-shadow: 0px 3px 0px #227093;
-}
-button:before {
-  content: "\f067";
-  font-family: FontAwesome;
-  margin-right: 5px;
+          width: 90px;
+          background-color: #4eb5e5;
+          color: #fff;
+          font-weight: 3px;
+          height: 39px;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+
+        }
+
+        button:before {
+          content: "\f067";
+          font-family: FontAwesome;
+          margin-right: 5px;
+        }
+        #member-name{
+          border-radius: 3px;
+          
+        }
+        #add-member2:before {
+  content: none;
 }
 
       </style>
@@ -447,6 +323,30 @@ button:before {
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
       <script>
+       const tagSelect = document.getElementById("tag-select");
+const addTagBtn = document.getElementById("add-tag-btn");
+const tagList = document.getElementById("tag-list");
+
+addTagBtn.addEventListener("click", () => {
+  const selectedTag = tagSelect.value;
+  if (selectedTag !== "") {
+    const tag = document.createElement("div");
+    tag.classList.add("tag");
+    tag.innerHTML = `
+      <span>${selectedTag}</span>
+    
+     
+    `;
+    tagList.innerHTML = "";
+    tagList.appendChild(tag);
+  }
+});
+
+tagList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("tag-remove")) {
+    e.target.parentElement.remove();
+  }
+});
         var addMemberBtn = document.getElementById("add-member");
         addMemberBtn.addEventListener("click", function () {
           var memberName = document.getElementById("member-name").value;
@@ -460,7 +360,7 @@ button:before {
         });
 
         var submitButton = document.getElementById('idea-submission-form');
-        submitButton.addEventListener("submit", function(e) {
+        submitButton.addEventListener("submit", function (e) {
           e.preventDefault();
           fetch("./ideasboard/submit-idea", {
             method: 'POST',
@@ -472,10 +372,10 @@ button:before {
               description: document.getElementById('description').value
             })
           }).then(function (res) {
-            if (res.ok){
+            if (res.ok) {
               return res.json();
             }
-          }).then((data)=>console.log(data))
+          }).then((data) => console.log(data))
             .catch((error) => console.warn('Something went wrong', error))
         });
       </script>
