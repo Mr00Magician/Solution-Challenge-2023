@@ -1,17 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from pyrebase import initialize_app
+import pyrebase
+import os
+from dotenv import load_dotenv
 
-firebase_config = {
-    'apiKey': "AIzaSyBpvrG-ZXQ5GciT2hQMn02S6rZ_ocdOMN8",
-    'authDomain': "ideaverse-80ef2.firebaseapp.com",
-    'projectId': "ideaverse-80ef2",
-    'storageBucket': "ideaverse-80ef2.appspot.com",
-    'messagingSenderId': "2138106869",
-    'appId': "1:2138106869:web:b4652eda13b5009a850ebc",
-    'measurementId': "G-VZRF1ZP2YJ",
-    'databaseURL': "https://ideaverse-80ef2-default-rtdb.firebaseio.com/"
-}
-firebase = initialize_app(firebase_config)
+load_dotenv()
+
+firebase_config = eval(os.environ.get('FIREBASE_OPTIONS_CONFIG'))
+# firebase_config['serviceAccount'] = eval(os.environ.get('FIREBASE_SERVICE_ACCOUNT_CONFIG'))
+# firebase_config['serviceAccount']['private_key'] = os.environ.get('PRIVATE_KEY').replace('/\\n/g', '\n')
+firebase = pyrebase.initialize_app (firebase_config)
 
 auth = firebase.auth()
 db = firebase.database()
@@ -28,25 +25,25 @@ value = {
 
 '''db_structure = {
     'users_info': {
-        'total_users': 1, 
-        'users': {
-            'Mr_Magician': {
-                'username':'Mr_Magician', 
-                'email':'meanasnadeem@gmail.com',
-                # 'ideas_posted': {'idea1': 'idea1'}
-            }
-        }
+        # 'total_users': 1, 
+        # 'users': {
+        #     'uid': {
+        #         'username':'Mr_Magician', 
+        #         'email':'meanasnadeem@gmail.com',
+        #         'ideas_posted': {'idea1': 'idea1'}
+        #     }
+        # }
     },
     'ideas_info': {
         'total_ideas': 0,
-    #     'ideas': {
-    #         'idea1': {
-    #           'serial':1,
-    #           'title':'dummy title',
-    #           'description': 'sample description',
-    #           'teams_working': {'team1': 'team1', 'team2': 'team2'}
-    #         }
-    #     }
+        # 'ideas': {
+        #     'idea1': {
+        #       'serial':1,
+        #       'title':'dummy title',
+        #       'description': 'sample description',
+        #       'teams_working': {'team1': 'team1', 'team2': 'team2'}
+        #     }
+        # }
     },
     'teams_info': {
         'total_teams': 0,
@@ -60,8 +57,6 @@ value = {
     }
 }'''
 
-current_user = ''
-
 @app.route("/")
 def login_page():
     return render_template('login.html', value = value)
@@ -72,8 +67,6 @@ def create_account_page():
 
 @app.route('/create-account/sign-up', methods = ['POST'])
 def create_account():
-    global current_user
-
     value['email'] = email = request.form.get('email') 
     value['username'] = username = request.form.get('username')
     value['password'] = password = request.form.get('password')
@@ -97,25 +90,30 @@ def create_account():
                     value = value
                 )
     
-    current_user = auth.create_user_with_email_and_password(email, password)
-    current_user['displayName'] = username
-    auth.update_profile(current_user['idToken'], display_name=username, photo_url = storage.child('no-profile-image.png').get_url(None))
+    try:
+        auth.create_user_with_email_and_password(email, password)
+    except Exception as e:
+        return render_template('create-account.html',
+                    error_message = 'Email already exists',
+                    value = value
+                )
     
-    db.child('users_info').child('users').child(username).set({'username':username, 'email':email})
+    auth.sign_in_with_email_and_password(email, password)
+    auth.update_profile(auth.current_user['idToken'], display_name=username, photo_url = storage.child('no-profile-image.png').get_url(None))
+    
+    db.child('users_info').child('users').child(username).set({'username':username, 'email':email}, auth.current_user['idToken'])
     tot_users = db.child('users_info').child('total_users').get().val()
-    db.child('users_info').child('total_users').set(tot_users + 1)
+    db.child('users_info').child('total_users').set(tot_users + 1, auth.current_user['idToken'])
 
     return redirect(url_for('home_page'))
 
 @app.route('/login', methods = ['POST'])
 def login():
-    global current_user
-    
     value['email'] = email = request.form.get('email')
     value['password'] = password = request.form.get('password')
 
     try:
-        current_user = auth.sign_in_with_email_and_password(email, password)
+        auth.sign_in_with_email_and_password(email, password)
         return redirect(url_for('home_page'))
     except Exception as e:
         # change this to redirect
@@ -123,20 +121,33 @@ def login():
     
 @app.route('/home')
 def home_page():
-    # print(current_user)
-    return render_template('index.html', user = current_user)
+    return render_template('index.html', user = auth.current_user)
 
 @app.route('/home/ideasboard')
 def ideasboard():
-    return render_template('ideasboard.html', user = current_user)
+    return render_template('ideasboard.html', user = auth.current_user)
 
 @app.route('/home/ideasboard/submit-idea', methods = ['POST'])
 def submit_idea():
     # print(request.json)
-    title = request.json['title']
-    description = request.json['description']
+    try:
+        title:str = request.json['title']
+        description:str = request.json['description']
+        tags:list = request.json['tags']
+        users:list = request.json['users']
+    except Exception as e:
+        return jsonify({
+            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred!')),
+        })
     
-    return jsonify(request.json)
+    return jsonify({
+            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'Idea Submitted Successfully!')),
+        })
+
+@app.route('/home/ideasboard/submit-idea/result/<message>')
+def idea_submission_result(message = ''):
+    # return render_template('idea-submission-result.html', message = message)
+    return f'<h1> message = {message} </h1>'
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)
