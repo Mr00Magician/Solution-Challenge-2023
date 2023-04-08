@@ -46,40 +46,34 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <div class="nav">
-    <input type="checkbox" id="nav-check">
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img src="../static/assets/img/logo.png" alt="">
+        <h1>Logis</h1>
+      </a>
 
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown"><a href="#"><span>{{user['displayName']}}</span> <i
+            class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="#">View Profile</a></li>
+              <li><a href="#">Log Out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav><!-- .navbar -->
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="ideasboard.html">Ideas</a>
-      <a href="contact.html">Contact</a>
-
-    </div>
-    <div>
-      <div class="nav-user">
-        <a href="#" class="nav-user-icon"><i class="fa fa-user" style="color: white;"></i></a>
-        <div class="nav-user-dropdown">
-          <div id="Username">
-            <a href="#"><img src="../static/assets/img/penguin_profile.png" style="font-size: 20px"> UserName</a>
-          </div>
-          <hr style="color: #454548; margin: 0px;">
-          <a href="#"><i class="fa fa-user"></i> Profile</a>
-
-          <a href="#"><i class="fa fa-cog"></i> Settings</a>
-          <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </div>
-      </div>
-    </div>
-
-
-  </div>
-
-  </div>
-
+    </div> 
+  </header><!-- End Header -->
+  <!-- End Header -->
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
