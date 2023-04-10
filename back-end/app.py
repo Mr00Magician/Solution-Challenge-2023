@@ -6,13 +6,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 firebase_config = eval(os.environ.get('FIREBASE_OPTIONS_CONFIG'))
-# firebase_config['serviceAccount'] = eval(os.environ.get('FIREBASE_SERVICE_ACCOUNT_CONFIG'))
-# firebase_config['serviceAccount']['private_key'] = os.environ.get('PRIVATE_KEY').replace('/\\n/g', '\n')
 firebase = pyrebase.initialize_app (firebase_config)
 
 auth = firebase.auth()
 db = firebase.database()
 storage = firebase.storage()
+
+categories = ['healthcare', 'technology']
 
 app = Flask(__name__, template_folder = '../front-end/templates', static_folder = '../front-end/static')
 
@@ -27,7 +27,7 @@ value = {
     'users_info': {
         # 'total_users': 1, 
         # 'users': {
-        #     'uid': {
+        #     'username': {
         #         'username':'Mr_Magician', 
         #         'email':'meanasnadeem@gmail.com',
         #         'ideas_posted': {'idea1': 'idea1'}
@@ -59,53 +59,10 @@ value = {
 
 @app.route("/")
 def login_page():
-    return render_template('login.html', value = value)
-
-@app.route('/create-account')
-def create_account_page():
-    return render_template('create-account.html', value = value)
-
-@app.route('/create-account/sign-up', methods = ['POST'])
-def create_account():
-    value['email'] = email = request.form.get('email') 
-    value['username'] = username = request.form.get('username')
-    value['password'] = password = request.form.get('password')
-    value['confirm_pass'] = confirm_pass = request.form.get('confirm_pass')
-    
-    if db.child('users_info').child('users').child(username).get().val() is not None:
-        return render_template('create-account.html',
-                    error_message = 'Username already exists',
-                    value = value
-                )
-
-    if len(password) < 8:
-        return render_template('create-account.html',
-                    error_message = 'Password should be greater than 8 characters',
-                    value = value
-                )
-    
-    if len(password) > 30:
-        return render_template('create-account.html',
-                    error_message = 'Password should not be more than 30 characters',
-                    value = value
-                )
-    
-    try:
-        auth.create_user_with_email_and_password(email, password)
-    except Exception as e:
-        return render_template('create-account.html',
-                    error_message = 'Email already exists',
-                    value = value
-                )
-    
-    auth.sign_in_with_email_and_password(email, password)
-    auth.update_profile(auth.current_user['idToken'], display_name=username, photo_url = storage.child('no-profile-image.png').get_url(None))
-    
-    db.child('users_info').child('users').child(username).set({'username':username, 'email':email}, auth.current_user['idToken'])
-    tot_users = db.child('users_info').child('total_users').get().val()
-    db.child('users_info').child('total_users').set(tot_users + 1, auth.current_user['idToken'])
-
-    return redirect(url_for('home_page'))
+    error_message = request.args.get('error_message')
+    if error_message is None:
+        error_message = ''
+    return render_template('login.html', value = value, error_message = error_message)
 
 @app.route('/login', methods = ['POST'])
 def login():
@@ -116,38 +73,95 @@ def login():
         auth.sign_in_with_email_and_password(email, password)
         return redirect(url_for('home_page'))
     except Exception as e:
-        # change this to redirect
-        return render_template('login.html', error_message = 'Invalid email/password combination', value = value)
+        return redirect(url_for('login_page', error_message = 'Invalid email/password combination'))
+
+@app.route('/create-account')
+def create_account_page():
+    error_message = request.args.get('error_message')
+    if error_message is None:
+        error_message = ''
+    return render_template('create-account.html', value = value, error_message = error_message)
+
+@app.route('/create-account/sign-up', methods = ['POST'])
+def create_account():
+    value['email'] = email = request.form.get('email') 
+    value['username'] = username = request.form.get('username')
+    value['password'] = password = request.form.get('password')
+    value['confirm_pass'] = confirm_pass = request.form.get('confirm_pass')
     
+    if db.child('users_info').child('users').child(username).get().val() is not None:
+        return redirect(url_for('create_account_page', error_message = 'Username already exists'))
+
+    if len(password) < 8:
+        return redirect(url_for('create_account_page', error_message = 'Password should be greater than 8 characters'))
+    
+    if len(password) > 30:
+        return redirect(url_for('create_account_page', error_message = 'Password should not be more than 30 characters'))
+    
+    if password != confirm_pass:
+        return redirect(url_for('create_account_page', error_message = 'Passwords do not match!'))
+
+    try:
+        auth.create_user_with_email_and_password(email, password)
+    except Exception as e:
+        return render_template('create_account_page', error_message = 'Email already exists')
+    try: 
+        auth.sign_in_with_email_and_password(email, password)
+        auth.update_profile(auth.current_user['idToken'], display_name=username, photo_url = storage.child('no-profile-image.png').get_url(None))
+        
+        db.child('users_info').child('users').child(username).set({'username':username, 'email':email}, auth.current_user['idToken'])
+        tot_users = db.child('users_info').child('total_users').get().val()
+        db.child('users_info').child('total_users').set(tot_users + 1, auth.current_user['idToken'])
+
+        return redirect(url_for('home_page'))
+    except Exception as e:
+        return render_template('create_account_page', error_message = 'Some error occurred. Please try again.')
+
 @app.route('/home')
 def home_page():
     return render_template('index.html', user = auth.current_user)
 
 @app.route('/home/ideasboard')
 def ideasboard():
-    return render_template('ideasboard.html', user = auth.current_user)
+    idea = request.args.get('idea')
+    return render_template('ideasboard.html', user = auth.current_user, value = idea)
 
 @app.route('/home/ideasboard/submit-idea', methods = ['POST'])
 def submit_idea():
-    # print(request.json)
     try:
-        title:str = request.json['title']
-        description:str = request.json['description']
-        tags:list = request.json['tags']
-        users:list = request.json['users']
+        idea = dict()
+        idea['title'] = request.json['title']
+        idea['description'] = request.json['description']
+        idea['tags']= request.json['tags']
+        idea['users'] = request.json['users']
+
+        for tag in idea['tags']:
+            if tag not in categories:
+                return jsonify({
+                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = 'Invalid Tag choice!', idea = idea)),
+                })
+            
+        for user in idea['users']:
+            if user not in db.child('users_info').child('users').get().val().keys():
+                return jsonify({
+                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = f'User "{user}" does not exist!', idea = idea)),
+                })
+
     except Exception as e:
         return jsonify({
-            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred!')),
+            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred!', idea = idea)),
         })
     
     return jsonify({
             'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'Idea Submitted Successfully!')),
         })
 
-@app.route('/home/ideasboard/submit-idea/result/<message>')
-def idea_submission_result(message = ''):
+@app.route('/home/ideasboard/submit-idea/result')
+def idea_submission_result():
+    message = request.args.get('message')
+    idea = request.args.get('idea')
     # return render_template('idea-submission-result.html', message = message)
-    return f'<h1> message = {message} </h1>'
+    return f'<h1> message = {message} {idea} </h1>'
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)
