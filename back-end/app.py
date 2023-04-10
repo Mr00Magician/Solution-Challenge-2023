@@ -25,35 +25,50 @@ value = {
 
 '''db_structure = {
     'users_info': {
-        # 'total_users': 1, 
-        # 'users': {
-        #     'username': {
-        #         'username':'Mr_Magician', 
-        #         'email':'meanasnadeem@gmail.com',
-        #         'ideas_posted': {'idea1': 'idea1'}
-        #     }
-        # }
+        'total_users': 1, 
+        'users': {
+            'username': {
+                'username':'Mr_Magician', 
+                'email':'meanasnadeem@gmail.com',
+                'ideas_posted': {'idea1': 'idea1'}
+            }
+        }
     },
     'ideas_info': {
         'total_ideas': 0,
-        # 'ideas': {
-        #     'idea1': {
-        #       'serial':1,
-        #       'title':'dummy title',
-        #       'description': 'sample description',
-        #       'teams_working': {'team1': 'team1', 'team2': 'team2'}
-        #     }
-        # }
+        'ideas': {
+            'idea1': {
+              'title':'dummy title',
+              'description': 'sample description',
+              'categories': [],
+              'teams_working': {'team1': 'team1', 'team2': 'team2'}
+            }
+        }
     },
     'teams_info': {
         'total_teams': 0,
-        # 'teams': {
-        #     'team1': {
-        #         'serial': 1,
-        #         'idea_serial': 1,
-        #         'members': {'MrMagician': 'MrMagician'}
-        #     }
-        # }
+        'teams': {
+            'team1': {
+                'idea': 'idea1',
+                'members': {'MrMagician': 'MrMagician'}
+            }
+        }
+    },
+    'categories_info': {
+        'healthcare': {
+            'total_ideas': 0,
+            'ideas': {
+                'idea1': 'idea1',
+                'idea2': 'idea2
+            }
+        },
+        'technology': {
+            'total_ideas': 0,
+            'ideas': {
+                'idea3': 'idea3',
+                'idea4': 'idea4'
+            }
+        }
     }
 }'''
 
@@ -129,27 +144,52 @@ def ideasboard():
 @app.route('/home/ideasboard/submit-idea', methods = ['POST'])
 def submit_idea():
     try:
-        idea = dict()
-        idea['title'] = request.json['title']
-        idea['description'] = request.json['description']
-        idea['tags']= request.json['tags']
-        idea['users'] = request.json['users']
+        value = dict()
+        value['title'] = request.json['title']
+        value['description'] = request.json['description']
+        value['tags'] = request.json['tags']
+        value['users'] = request.json['users']
 
-        for tag in idea['tags']:
+        for tag in value['tags']:
             if tag not in categories:
                 return jsonify({
-                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = 'Invalid Tag choice!', idea = idea)),
+                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = 'Invalid Tag choice!', value = value)),
                 })
             
-        for user in idea['users']:
+        for user in value['users']:
             if user not in db.child('users_info').child('users').get().val().keys():
                 return jsonify({
-                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = f'User "{user}" does not exist!', idea = idea)),
+                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = f'User "{user}" does not exist!', value = value)),
                 })
+        
+        tot_teams = db.child('teams_info').child('total_teams').get().val()
+        tot_ideas = db.child('ideas_info').child('total_ideas').get().val()
+        team_id = f'team{tot_teams + 1}'
+        idea_id = f'idea{tot_ideas + 1}'
+
+        team = {
+            team_id: {
+                'idea': f'idea{tot_ideas + 1}',
+                'members': {x: x for x in value['users']}
+            }
+        }
+        idea = {
+            idea_id: {
+                'title': value['title'],
+                'description': value['description'],
+                'categories': value['tags'],
+                'teams_working': {team_id: team_id}
+            }
+        }
+
+        db.child('teams_info').child('teams').update(team)
+        db.child('teams_info').child('total_teams').set(tot_teams + 1)
+        db.child('ideas_info').child('ideas').update(idea)
+        db.child('ideas_info').child('total_ideas').set(tot_ideas + 1)
 
     except Exception as e:
         return jsonify({
-            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred!', idea = idea)),
+            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred!', value = value)),
         })
     
     return jsonify({
