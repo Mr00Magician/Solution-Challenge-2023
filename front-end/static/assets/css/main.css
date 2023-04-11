@@ -139,7 +139,7 @@ a {
 }
 
 a:hover {
-  color: #406aff;
+  color: #3d404a;
   text-decoration: none;
 }
 
@@ -172,7 +172,7 @@ section {
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 0;
-  color: #001973;
+  color: #0e5650;
   position: relative;
   z-index: 2;
   margin-bottom: 20px;
@@ -186,7 +186,7 @@ section {
   display: block;
   width: 50px;
   height: 3px;
-  background: var(--color-primary);
+ 
   left: 0;
   right: 0;
   bottom: 0;
@@ -236,20 +236,21 @@ section {
 
 .breadcrumbs .page-header:before {
   content: "";
-  background-color: rgba(14, 29, 52, 0.8);
+ 
   position: absolute;
   inset: 0;
 }
 
-.breadcrumbs .page-header h2 {
-  font-size: 56px;
+.breadcrumbs .page-header h1 {
+  font-size: 50px;
   font-weight: 500;
-  color: #fff;
-  font-family: var(--font-secondary);
+  color: #eff8ff;
+  font-family: 'Homemade Apple', cursive;
+
 }
 
 .breadcrumbs .page-header p {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(46, 44, 44, 0.8);
 }
 
 .breadcrumbs nav {
@@ -410,9 +411,9 @@ section {
 }
 
 .header.sticked {
-  background: rgba(14, 29, 52, 0.9);
+  background: rgba(2, 36, 67, 0.9);
   padding: 15px 0;
-  box-shadow: 0px 2px 20px rgba(14, 29, 52, 0.1);
+  box-shadow: 0px 2px 20px rgba(164, 46, 46, 0.1);
 }
 
 .header .logo img {
@@ -424,7 +425,7 @@ section {
   font-size: 30px;
   margin: 0;
   font-weight: 700;
-  color: #fff;
+  color: #040404;
   font-family: var(--font-primary);
 }
 
@@ -455,10 +456,10 @@ section {
     align-items: center;
     justify-content: space-between;
     padding: 10px 0 10px 30px;
-    font-family: var(--font-primary);
-    font-size: 16px;
-    font-weight: 400;
-    color: rgba(188, 107, 107, 0.6);
+  
+    font-size: 18px;
+    
+    color: rgba(254, 255, 255, 0.6);
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -474,7 +475,7 @@ section {
   .navbar .active,
   .navbar .active:focus,
   .navbar li:hover>a {
-    color: #311313;
+    color: #483e3e;
   }
 
   .navbar .get-a-quote,
@@ -483,7 +484,7 @@ section {
     padding: 8px 20px;
     margin-left: 30px;
     border-radius: 4px;
-    color: #877e7e;
+    color: #000000;
   }
 
   .navbar .get-a-quote:hover,
@@ -527,7 +528,7 @@ section {
   .navbar .dropdown ul a:hover,
   .navbar .dropdown ul .active:hover,
   .navbar .dropdown ul li:hover>a {
-    color: var(--color-primary);
+    color: rgb(123, 122, 122);
   }
 
   .navbar .dropdown:hover>ul {
@@ -588,7 +589,7 @@ section {
     inset: 0;
     padding: 50px 0 10px 0;
     margin: 0;
-    background: rgba(14, 29, 52, 0.9);
+    background: rgba(239, 241, 243, 0.9);
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
@@ -603,7 +604,7 @@ section {
     font-family: var(--font-primary);
     font-size: 16px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(47, 52, 54, 0.7);
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -619,23 +620,20 @@ section {
   .navbar .active,
   .navbar .active:focus,
   .navbar li:hover>a {
-    color: #fff;
+    background-color: #000000;
+    transform: translateY(-5px);
   }
 
   .navbar .get-a-quote,
   .navbar .get-a-quote:focus {
-    background: var(--color-primary);
+    background:rgb(195, 196, 204);
     padding: 8px 20px;
     border-radius: 4px;
     margin: 15px;
     color: #fff;
   }
 
-  .navbar .get-a-quote:hover,
-  .navbar .get-a-quote:focus:hover {
-    color: #fff;
-    background: rgba(13, 66, 255, 0.8);
-  }
+  
 
   .navbar .dropdown ul,
   .navbar .dropdown .dropdown ul {
@@ -689,7 +687,7 @@ section {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(14, 29, 52, 0.8);
+    background: rgba(19, 19, 19, 0.8);
     z-index: 9996;
   }
 }
