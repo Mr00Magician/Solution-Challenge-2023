@@ -14,6 +14,9 @@
   <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
   <link rel="ideasboard.scss">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,17 +55,18 @@
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="../static/assets/img/logo.png" alt="">
-        <h1>Logis</h1>
+        
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="index.html"><b>Home</b></a></li>
+          <li><a href="about.html"><b>About</b></a></li>
+          <li><a href="about.html"><b>Contact Us</b></a></li>
           <li class="dropdown"><a href="#"><span>{{user['displayName']}}</span> <i
-            class="bi bi-chevron-down dropdown-indicator"></i></a>
+                class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="#">View Profile</a></li>
               <li><a href="#">Log Out</a></li>
@@ -71,21 +75,22 @@
         </ul>
       </nav><!-- .navbar -->
 
-    </div> 
+    </div>
   </header><!-- End Header -->
   <!-- End Header -->
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center"
-        style="background-image: url('../static/assets/img/background.jpg');">
-        <div class="container position-relative">
+      <div class="page-header align-items-center"
+        style="background-image: url('../static/assets/img/amador-loureiro-BVyNlchWqzs-unsplash.jpg');">
+        <div class="container">
           <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>Ideas Board</h2>
-              <p>Add your ideas and let the yourself known to the world!!<br>
-                Fill in the details below</p>
+            <div class="col-lg-8 text-center">
+               
+                <br><br><br>
+              <h1>Ideas Board</h1>
+              <p></p>
 
             </div>
           </div>
@@ -131,7 +136,7 @@
               <option value="3">HTML</option>
               <option value="4">CSS</option>
             </select>
-            <button id="add-member">Add </button>
+            <button id="add-tag-btn">Add </button>
           </div>
           <div id="tag-list"></div>
         </div>
@@ -140,7 +145,7 @@
           <table>
             <thead>
               <tr>
-                <th>Username   </th>
+                <th>Username </th>
               </tr>
             </thead>
             <tbody id="team-members">
@@ -168,25 +173,20 @@
 
 
       <style>
-        #tag-select{
-          width: 210px;
-          height:45px;
-          font-size: 15px;
-        }
-
-
-        #add-member {
-          width: 90px;
-          height: 32px;
-          padding: 0%;
-          
-
-        }
         #add-member2 {
           width: 90px;
-          height: 32px;
+          height: 35px;
           padding: 0%;
-          margin-left:20px;
+          margin-left: 20px;
+
+
+        }
+
+        #add-tag-btn {
+          width: 120px;
+          height: 40px;
+          padding: 0%;
+          margin-left: 20px;
 
         }
 
@@ -202,7 +202,7 @@
           font-weight: 5px;
           height: 40px;
         }
-        
+
 
 
         @font-face {
@@ -242,13 +242,20 @@
 
         label {
           color: #8e6e6e;
+        
         }
 
-        #add-member:before {
+        #add-tag-btn:before {
           content: none;
         }
-        #submitbutton:before{
-          content:none;
+
+        #member-name {
+          margin: 2px;
+        }
+
+
+        #submitbutton:before {
+          content: none;
         }
 
 
@@ -270,14 +277,15 @@
           font-family: FontAwesome;
           margin-right: 5px;
         }
-        #member-name{
-          border-radius: 3px;
-          
-        }
-        #add-member2:before {
-  content: none;
-}
 
+        #member-name {
+          border-radius: 3px;
+
+        }
+
+        #add-member2:before {
+          content: none;
+        }
       </style>
 
 
@@ -299,7 +307,7 @@
 
       <!-- Vendor JS Files -->
       <script src="../static/assets/js/main.js"></script>
-
+      <!-- JS for add tag button-->
       </script>
       <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
       <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -317,31 +325,28 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
       <script>
-       const tagSelect = document.getElementById("tag-select");
-const addTagBtn = document.getElementById("add-tag-btn");
-const tagList = document.getElementById("tag-list");
+        const tagSelect = document.getElementById("tag-select");
+        const addTagBtn = document.getElementById("add-tag-btn");
+        const tagList = document.getElementById("tag-list");
 
-addTagBtn.addEventListener("click", () => {
-  const selectedTag = tagSelect.value;
-  if (selectedTag !== "") {
-    const tag = document.createElement("div");
-    tag.classList.add("tag");
-    tag.innerHTML = `
+        addTagBtn.addEventListener("click", () => {
+          const selectedOption = tagSelect.options[tagSelect.selectedIndex];
+          const selectedTag = selectedOption.text;
+          if (selectedTag !== "") {
+            const tag = document.createElement("div");
+            tag.classList.add("tag");
+            tag.innerHTML = `
       <span>${selectedTag}</span>
     
      
     `;
-    tagList.innerHTML = "";
-    tagList.appendChild(tag);
-  }
-});
+            tagList.innerHTML = "";
+            tagList.appendChild(tag);
+          }
+        });
 
-tagList.addEventListener("click", (e) => {
-  if (e.target.classList.contains("tag-remove")) {
-    e.target.parentElement.remove();
-  }
-});
-        var addMemberBtn = document.getElementById("add-member");
+
+        var addMemberBtn = document.getElementById("add-member2");
         addMemberBtn.addEventListener("click", function () {
           var memberName = document.getElementById("member-name").value;
           var tableBody = document.getElementById("team-members");
