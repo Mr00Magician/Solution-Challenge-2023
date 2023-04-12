@@ -335,12 +335,7 @@
           if (selectedTag !== "") {
             const tag = document.createElement("div");
             tag.classList.add("tag");
-            tag.innerHTML = `
-      <span>${selectedTag}</span>
-    
-     
-    `;
-            tagList.innerHTML = "";
+            tag.innerHTML = `<span>${selectedTag}</span>`;
             tagList.appendChild(tag);
           }
         });
