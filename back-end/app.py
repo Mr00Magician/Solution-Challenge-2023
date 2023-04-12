@@ -12,7 +12,16 @@ auth = firebase.auth()
 db = firebase.database()
 storage = firebase.storage()
 
-categories = ['healthcare', 'technology']
+categories = [
+    'Healthcare', 
+    'Technology', 
+    'Education', 
+    'Business or Entrepreneurship', 
+    'Science and Research', 
+    'E-Sports', 
+    'Environmentalism',
+    'Entertainment'
+]
 
 app = Flask(__name__, template_folder = '../front-end/templates', static_folder = '../front-end/static')
 
@@ -23,54 +32,111 @@ value = {
     'confirm_pass': ''
 }
 
-'''db_structure = {
-    'users_info': {
-        'total_users': 1, 
-        'users': {
-            'username': {
-                'username':'Mr_Magician', 
-                'email':'meanasnadeem@gmail.com',
-                'ideas_posted': {'idea1': 'idea1'}
-            }
-        }
-    },
-    'ideas_info': {
-        'total_ideas': 0,
-        'ideas': {
-            'idea1': {
-              'title':'dummy title',
-              'description': 'sample description',
-              'categories': [],
-              'teams_working': {'team1': 'team1', 'team2': 'team2'}
-            }
-        }
-    },
-    'teams_info': {
-        'total_teams': 0,
-        'teams': {
-            'team1': {
-                'idea': 'idea1',
-                'members': {'MrMagician': 'MrMagician'}
-            }
-        }
-    },
-    'categories_info': {
-        'healthcare': {
-            'total_ideas': 0,
-            'ideas': {
-                'idea1': 'idea1',
-                'idea2': 'idea2
+class Refs:
+
+    '''db_structure = {
+        'users_info': {
+            'total_users': 1, 
+            'users': {
+                'username': {
+                    'email':'meanasnadeem@gmail.com',
+                    'ideas_posted': {'idea1': 'idea1'}
+                }
             }
         },
-        'technology': {
+        'ideas_info': {
             'total_ideas': 0,
             'ideas': {
-                'idea3': 'idea3',
-                'idea4': 'idea4'
+                'idea1': {
+                'title':'dummy title',
+                'description': 'sample description',
+                'categories': [],
+                'teams_working': {'team1': 'team1', 'team2': 'team2'}
+                }
+            }
+        },
+        'teams_info': {
+            'total_teams': 0,
+            'teams': {
+                'team1': {
+                    'idea': 'idea1',
+                    'members': {'MrMagician': 'MrMagician'}
+                }
+            }
+        },
+        'categories_info': {
+            'healthcare': {
+                'total_ideas': 0,
+                'ideas': {
+                    'idea1': 'idea1',
+                    'idea2': 'idea2
+                }
+            },
+            'technology': {
+                'total_ideas': 0,
+                'ideas': {
+                    'idea3': 'idea3',
+                    'idea4': 'idea4'
+                }
             }
         }
-    }
-}'''
+    }'''
+
+    __get_idea = lambda idea, token: db.child('ideas_info').child('ideas').child(idea).get(token).val()
+    __get_user = lambda user, token: db.child('users_info').child('users').child(user).get(token).val()
+    __get_team = lambda team, token: db.child('teams_info').child('teams').child(team).get(token).val()
+
+    __add_idea = lambda idea, token: db.child('ideas_info').child('ideas').update(idea, token)
+    __add_user = lambda user, token: db.child('users_info').child('users').update(user, token)
+    __add_team = lambda team, token: db.child('teams_info').child('teams').update(team, token)
+
+    __get_tot_users = lambda token: db.child('users_info').child('total_users').get(token).val()
+    __get_tot_ideas = lambda token: db.child('ideas_info').child('total_ideas').get(token).val()
+    __get_tot_teams = lambda token: db.child('teams_info').child('total_teams').get(token).val()
+
+    __set_tot_users = lambda value, token: db.child('users_info').child('total_users').set(value, token)
+    __set_tot_ideas = lambda value, token: db.child('ideas_info').child('total_ideas').set(value, token)
+    __set_tot_teams = lambda value, token: db.child('teams_info').child('total_teams').set(value, token)
+
+    @classmethod
+    def get_idea(cls, idea, token = None):
+        return cls.__get_idea(idea, token)  
+    @classmethod
+    def get_user(cls, user, token = None):
+        return cls.__get_user(user, token)  
+    @classmethod
+    def get_team(cls, team, token = None):
+        return cls.__get_team(team, token)
+
+    @classmethod
+    def add_idea(cls, idea, token = None):
+        cls.__add_idea(idea, token)
+    @classmethod
+    def add_user(cls, user, token = None):
+        cls.__add_user(user, token)
+    @classmethod
+    def add_team(cls, team, token = None):
+        cls.__add_team(team, token)
+
+    @classmethod
+    def get_tot_users(cls, token = None):
+        return cls.__get_tot_users(token)
+    @classmethod
+    def get_tot_ideas(cls, token = None):
+        return cls.__get_tot_ideas(token)
+    @classmethod
+    def get_tot_teams(cls, token = None):
+        return cls.__get_tot_teams(token)
+    
+    @classmethod
+    def set_tot_users(cls, value, token = None):
+        return cls.__set_tot_users(value, token)
+    @classmethod
+    def set_tot_ideas(cls, value, token = None):
+        return cls.__set_tot_ideas(value, token)
+    @classmethod
+    def set_tot_teams(cls, value, token = None):
+        return cls.__set_tot_teams(value, token)
 
 @app.route("/")
 def login_page():
@@ -104,7 +170,7 @@ def create_account():
     value['password'] = password = request.form.get('password')
     value['confirm_pass'] = confirm_pass = request.form.get('confirm_pass')
     
-    if db.child('users_info').child('users').child(username).get().val() is not None:
+    if Refs.get_user(username) is not None:
         return redirect(url_for('create_account_page', error_message = 'Username already exists'))
 
     if len(password) < 8:
@@ -124,9 +190,14 @@ def create_account():
         auth.sign_in_with_email_and_password(email, password)
         auth.update_profile(auth.current_user['idToken'], display_name=username, photo_url = storage.child('no-profile-image.png').get_url(None))
         
-        db.child('users_info').child('users').child(username).set({'username':username, 'email':email}, auth.current_user['idToken'])
-        tot_users = db.child('users_info').child('total_users').get().val()
-        db.child('users_info').child('total_users').set(tot_users + 1, auth.current_user['idToken'])
+        user = {
+            username: {
+                'email': email
+            }
+        }
+
+        Refs.add_user(user, auth.current_user['idToken'])
+        Refs.set_tot_users(Refs.get_tot_users() + 1)
 
         return redirect(url_for('home_page'))
     except Exception as e:
@@ -143,6 +214,8 @@ def ideasboard():
 
 @app.route('/home/ideasboard/submit-idea', methods = ['POST'])
 def submit_idea():
+    # Checks Needed:
+    # Check if condition for adding only existing users to the default team for this idea works.
     try:
         value = dict()
         value['title'] = request.json['title']
@@ -157,19 +230,19 @@ def submit_idea():
                 })
             
         for user in value['users']:
-            if user not in db.child('users_info').child('users').get().val().keys():
+            if Refs.get_user(user) is None:
                 return jsonify({
                     'redirect_to': '{}'.format(url_for('ideasboard', error_message = f'User "{user}" does not exist!', value = value)),
                 })
         
-        tot_teams = db.child('teams_info').child('total_teams').get().val()
-        tot_ideas = db.child('ideas_info').child('total_ideas').get().val()
+        tot_teams = Refs.get_tot_teams()
+        tot_ideas = Refs.get_tot_ideas()
         team_id = f'team{tot_teams + 1}'
         idea_id = f'idea{tot_ideas + 1}'
 
         team = {
             team_id: {
-                'idea': f'idea{tot_ideas + 1}',
+                'idea': idea_id,
                 'members': {x: x for x in value['users']}
             }
         }
@@ -181,11 +254,11 @@ def submit_idea():
                 'teams_working': {team_id: team_id}
             }
         }
-
-        db.child('teams_info').child('teams').update(team)
-        db.child('teams_info').child('total_teams').set(tot_teams + 1)
-        db.child('ideas_info').child('ideas').update(idea)
-        db.child('ideas_info').child('total_ideas').set(tot_ideas + 1)
+        
+        Refs.add_team(team)
+        Refs.set_tot_teams(tot_teams + 1)
+        Refs.add_idea(idea)
+        Refs.set_tot_ideas(tot_ideas + 1)
 
     except Exception as e:
         return jsonify({
