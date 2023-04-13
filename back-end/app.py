@@ -127,11 +127,11 @@ class Refs:
         db.child('teams_info').child('total_teams').set(value, token)
 
     @staticmethod
-    def add_in_category(category, idea_ID_and_title):
-        db.child('categories_info').child(category).update(idea_ID_and_title)
+    def add_in_category(category, idea_ID_and_title, token = None):
+        db.child('categories_info').child(category).update(idea_ID_and_title, token)
     @staticmethod
-    def get_all_from(category):
-        db.child('categories_info').child(category).child('/').get().val()
+    def get_all_from(category, token = None):
+        db.child('categories_info').child(category).child('/').get(token).val()
 
 @app.route("/")
 def login_page():
@@ -280,6 +280,19 @@ def idea_submission_result():
     idea = request.args.get('idea')
     # return render_template('idea-submission-result.html', message = message)
     return f'<h1> message = {message} {idea} </h1>'
+
+@app.route('/home/explore-ideas')
+def explore_ideas_page():
+    return render_template (
+        template_name_or_list = 'explore-ideas.html', categories = categories)
+
+@app.route('/home/explore-ideas/<category>')
+def ideas_from_category():
+    category = request.args.get('category')
+    if category not in categories:
+        return '<h1 align = "center">Bad request!</h1>'
+    ideas = Refs.get_all_from(category)
+    return jsonify(ideas)
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)
