@@ -82,61 +82,55 @@ class Refs:
         }
     }'''
 
-    __get_idea = lambda idea, token: db.child('ideas_info').child('ideas').child(idea).get(token).val()
-    __get_user = lambda user, token: db.child('users_info').child('users').child(user).get(token).val()
-    __get_team = lambda team, token: db.child('teams_info').child('teams').child(team).get(token).val()
+    @staticmethod
+    def get_idea(idea, token = None):
+        return db.child('ideas_info').child('ideas').child(idea).get(token).val()
+    @staticmethod
+    def get_user(user, token = None):
+        return db.child('users_info').child('users').child(user).get(token).val()
+    @staticmethod
+    def get_team(team, token = None):
+        return db.child('teams_info').child('teams').child(team).get(token).val()
 
-    __add_idea = lambda idea, token: db.child('ideas_info').child('ideas').update(idea, token)
-    __add_user = lambda user, token: db.child('users_info').child('users').update(user, token)
-    __add_team = lambda team, token: db.child('teams_info').child('teams').update(team, token)
+    @staticmethod
+    def get_all_ideas(token = None):
+        return Refs.get_idea('/', token)
+    @staticmethod
+    def get_all_users(token = None):
+        return Refs.get_user('/', token)
+    @staticmethod
+    def get_all_teams(token = None):
+        return Refs.get_team('/', token)
 
-    __get_tot_users = lambda token: db.child('users_info').child('total_users').get(token).val()
-    __get_tot_ideas = lambda token: db.child('ideas_info').child('total_ideas').get(token).val()
-    __get_tot_teams = lambda token: db.child('teams_info').child('total_teams').get(token).val()
+    @staticmethod
+    def add_idea(idea, token = None):
+        db.child('ideas_info').child('ideas').update(idea, token)
+    @staticmethod
+    def add_user(user, token = None):
+        db.child('users_info').child('users').update(user, token)
+    @staticmethod
+    def add_team(team, token = None):
+        db.child('teams_info').child('teams').update(team, token)
 
-    __set_tot_users = lambda value, token: db.child('users_info').child('total_users').set(value, token)
-    __set_tot_ideas = lambda value, token: db.child('ideas_info').child('total_ideas').set(value, token)
-    __set_tot_teams = lambda value, token: db.child('teams_info').child('total_teams').set(value, token)
-
-    @classmethod
-    def get_idea(cls, idea, token = None):
-        return cls.__get_idea(idea, token)  
-    @classmethod
-    def get_user(cls, user, token = None):
-        return cls.__get_user(user, token)  
-    @classmethod
-    def get_team(cls, team, token = None):
-        return cls.__get_team(team, token)
-
-    @classmethod
-    def add_idea(cls, idea, token = None):
-        cls.__add_idea(idea, token)
-    @classmethod
-    def add_user(cls, user, token = None):
-        cls.__add_user(user, token)
-    @classmethod
-    def add_team(cls, team, token = None):
-        cls.__add_team(team, token)
-
-    @classmethod
-    def get_tot_users(cls, token = None):
-        return cls.__get_tot_users(token)
-    @classmethod
-    def get_tot_ideas(cls, token = None):
-        return cls.__get_tot_ideas(token)
-    @classmethod
-    def get_tot_teams(cls, token = None):
-        return cls.__get_tot_teams(token)
+    @staticmethod
+    def get_tot_users(token = None):
+        return db.child('users_info').child('total_users').get(token).val()
+    @staticmethod
+    def get_tot_ideas(token = None):
+        return db.child('ideas_info').child('total_ideas').get(token).val()
+    @staticmethod
+    def get_tot_teams(token = None):
+        return db.child('teams_info').child('total_teams').get(token).val()
     
-    @classmethod
-    def set_tot_users(cls, value, token = None):
-        return cls.__set_tot_users(value, token)
-    @classmethod
-    def set_tot_ideas(cls, value, token = None):
-        return cls.__set_tot_ideas(value, token)
-    @classmethod
-    def set_tot_teams(cls, value, token = None):
-        return cls.__set_tot_teams(value, token)
+    @staticmethod
+    def set_tot_users(value, token = None):
+        db.child('users_info').child('total_users').set(value, token)
+    @staticmethod
+    def set_tot_ideas(value, token = None):
+        db.child('ideas_info').child('total_ideas').set(value, token)
+    @staticmethod
+    def set_tot_teams(value, token = None):
+        db.child('teams_info').child('total_teams').set(value, token)
 
 @app.route("/")
 def login_page():
