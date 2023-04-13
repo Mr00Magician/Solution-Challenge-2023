@@ -132,6 +132,13 @@ class Refs:
     def set_tot_teams(value, token = None):
         db.child('teams_info').child('total_teams').set(value, token)
 
+    @staticmethod
+    def add_in_category(category, idea_ID_and_title):
+        db.child('categories').child(category).update(idea_ID_and_title)
+    @staticmethod
+    def get_all_from(category):
+        db.child('categories').child(category).child('/').get().val()
+
 @app.route("/")
 def login_page():
     error_message = request.args.get('error_message')
@@ -260,6 +267,10 @@ def submit_idea():
         Refs.add_idea(idea)
         Refs.set_tot_ideas(tot_ideas + 1)
 
+        idea[idea_id] = {key: idea[idea_id][key] for key in idea[idea_id] if key == 'title'}
+        for category in categories:
+            Refs.add_in_category(category, idea)
+            
     except Exception as e:
         return jsonify({
             'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred! Please try again.')),
