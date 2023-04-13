@@ -210,6 +210,12 @@ def home_page():
 @app.route('/home/ideasboard')
 def ideasboard():
     idea = request.args.get('idea')
+    if idea is None:
+        idea['title'] = ''
+        idea['description'] = ''
+        idea['tags'] = ''
+        idea['users'] = ''
+        
     return render_template('ideasboard.html', user = auth.current_user, value = idea)
 
 @app.route('/home/ideasboard/submit-idea', methods = ['POST'])
@@ -226,13 +232,13 @@ def submit_idea():
         for tag in value['tags']:
             if tag not in categories:
                 return jsonify({
-                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = 'Invalid Tag choice!', value = value)),
+                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = 'Invalid Tag choice!', idea =  value)),
                 })
             
         for user in value['users']:
             if Refs.get_user(user) is None:
                 return jsonify({
-                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = f'User "{user}" does not exist!', value = value)),
+                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = f'User "{user}" does not exist!', idea =  value)),
                 })
         
         tot_teams = Refs.get_tot_teams()
@@ -262,7 +268,7 @@ def submit_idea():
 
     except Exception as e:
         return jsonify({
-            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred!', value = value)),
+            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred! Please try again.')),
         })
     
     return jsonify({
