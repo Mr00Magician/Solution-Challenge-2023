@@ -65,19 +65,13 @@ class Refs:
             }
         },
         'categories_info': {
-            'healthcare': {
-                'total_ideas': 0,
-                'ideas': {
-                    'idea1': 'idea1',
-                    'idea2': 'idea2
-                }
+            'Healthcare': {
+                    'idea1': {'title': 'dummy title1'},
+                    'idea2': {'title': 'dummy title2'}
             },
-            'technology': {
-                'total_ideas': 0,
-                'ideas': {
-                    'idea3': 'idea3',
-                    'idea4': 'idea4'
-                }
+            'Technology': {
+                    'idea3': {'title': 'dummy title3'},
+                    'idea4': {'title': 'dummy title4'}
             }
         }
     }'''
@@ -131,6 +125,13 @@ class Refs:
     @staticmethod
     def set_tot_teams(value, token = None):
         db.child('teams_info').child('total_teams').set(value, token)
+
+    @staticmethod
+    def add_in_category(category, idea_ID_and_title):
+        db.child('categories_info').child(category).update(idea_ID_and_title)
+    @staticmethod
+    def get_all_from(category):
+        db.child('categories_info').child(category).child('/').get().val()
 
 @app.route("/")
 def login_page():
@@ -259,6 +260,10 @@ def submit_idea():
         Refs.set_tot_teams(tot_teams + 1)
         Refs.add_idea(idea)
         Refs.set_tot_ideas(tot_ideas + 1)
+
+        idea[idea_id] = {key: idea[idea_id][key] for key in idea[idea_id] if key == 'title'}
+        for category in categories:
+            Refs.add_in_category(category, idea)
 
     except Exception as e:
         return jsonify({
