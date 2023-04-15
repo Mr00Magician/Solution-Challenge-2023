@@ -329,7 +329,8 @@
         const addTagBtn = document.getElementById("add-tag-btn");
         const tagList = document.getElementById("tag-list");
 
-        addTagBtn.addEventListener("click", () => {
+        addTagBtn.addEventListener("click", (e) => {
+          e.preventDefault();
           const selectedOption = tagSelect.options[tagSelect.selectedIndex];
           const selectedTag = selectedOption.text;
           if (selectedTag !== "") {
@@ -369,7 +370,7 @@
             if (res.ok) {
               return res.json();
             }
-          }).then((data) => console.log(data))
+          }).then((data) => window.location.assign(data.redirect_to))
             .catch((error) => console.warn('Something went wrong', error))
         });
       </script>
