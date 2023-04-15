@@ -59,6 +59,7 @@ class Refs:
             'total_teams': 0,
             'teams': {
                 'team1': {
+                    'name': 'nameless wonder',
                     'idea': 'idea1',
                     'members': {'MrMagician': 'MrMagician'}
                 }
@@ -105,6 +106,23 @@ class Refs:
     @staticmethod
     def add_team(team, token = None):
         db.child('teams_info').child('teams').update(team, token)
+
+    @staticmethod
+    def update_idea(idea, team_ID = None, title = None, description = None, token = None):
+        idea_ref: pyrebase.pyrebase.Database = lambda: db.child('ideas_info').child('ideas').child(idea)
+        if team_ID is not None:
+            idea_ref.child('teams_working').update({team_ID: team_ID}, token)
+        if title is not None:
+            idea_ref.child('title').set(title, token)
+        if description is not None:
+            idea_ref.child('description').set(description, token)
+    @staticmethod
+    def update_team(team, name = None, new_member = None, token = None):
+        team_ref: pyrebase.pyrebase.Database = lambda: db.child('teams_info').child('teams').child(team)
+        if new_member is not None:
+            team_ref.child('members').update({new_member: new_member}, token)
+        if name is not None:
+            team_ref.child('name').set(name, token)
 
     @staticmethod
     def get_tot_users(token = None):
@@ -224,6 +242,7 @@ def submit_idea():
         value['description'] = request.json['description']
         value['tags'] = request.json['tags']
         value['users'] = request.json['users']
+        value['team_name'] = request.json['team_name']
 
         for tag in value['tags']:
             if tag not in categories:
@@ -244,6 +263,7 @@ def submit_idea():
 
         team = {
             team_id: {
+                'name': value['team_name'],
                 'idea': idea_id,
                 'members': {x: x for x in value['users']}
             }
@@ -288,19 +308,52 @@ def explore_ideas_page():
         template_name_or_list = 'explore-ideas.html', categories = categories)
 
 @app.route('/home/explore-ideas/<category>')
-def ideas_from_category():
-    category = request.args.get('category')
+def ideas_from_category(category):
     if category not in categories:
         return '<h1 align = "center">Bad request!</h1>'
     ideas = Refs.get_all_from(category)
     # after receiving this on the front end, display the titles in a container and put the idea_id in a sub-container and set its display to none 
     return jsonify(ideas)
 
-@app.route('/home/explore-ideas/<category>/<idea_ID>')
-def get_idea_info():
-    idea_ID = request.args.get('idea_ID')
+@app.route('/home/explore-ideas/<idea_ID>')
+def get_idea_info(idea_ID):
     idea = Refs.get_idea(idea_ID)
+    if idea is None:
+        return '<h1 align = "center">Bad request!</h1>'
     return jsonify(idea)
+
+@app.route('/home/explore-ideas/<idea_ID>/add-team/')
+def add_team(idea_ID):
+    team_info = dict()
+    team_info['name'] = request.json['name']
+    team_info['members'] = request.json['members']
+
+    for member in value['members']:
+        if Refs.get_user(member) is None:
+            return jsonify({
+                'error': 'yes',
+                'message': f'User {member} does not exist!'
+            })
+    if Refs.get_idea(idea_ID) is None:
+        return jsonify({
+            'error': 'yes',
+            'message': f'Idea does not exist!'
+        })
+    
+    tot_teams = Refs.get_tot_teams()
+    team_id = f'team{tot_teams + 1}'
+
+    team = {
+        team_id: {
+            'name': value['team_name'],
+            'idea': idea_ID,
+            'members': {x: x for x in team_info['members']}
+        }
+    }
+
+    Refs.add_team(team)
+    Refs.set_tot_teams(tot_teams + 1)
+    Refs.update_idea(idea_ID, team_id)
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)
