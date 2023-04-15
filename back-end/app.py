@@ -206,6 +206,7 @@ def home_page():
 def ideasboard():
     idea = request.args.get('idea')
     if idea is None:
+        idea = dict()
         idea['title'] = ''
         idea['description'] = ''
         idea['tags'] = ''
