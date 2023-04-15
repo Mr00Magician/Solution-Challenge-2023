@@ -292,7 +292,14 @@ def ideas_from_category():
     if category not in categories:
         return '<h1 align = "center">Bad request!</h1>'
     ideas = Refs.get_all_from(category)
+    # after receiving this on the front end, display the titles in a container and put the idea_id in a sub-container and set its display to none 
     return jsonify(ideas)
+
+@app.route('/home/explore-ideas/<category>/<idea_ID>')
+def get_idea_info():
+    idea_ID = request.args.get('idea_ID')
+    idea = Refs.get_idea(idea_ID)
+    return jsonify(idea)
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)
