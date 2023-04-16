@@ -125,7 +125,7 @@ def submit_idea():
         value['title'] = request.json['title']
         value['description'] = request.json['description']
         value['tags'] = request.json['tags']
-        value['users'] = request.json['users']
+        value['users'] = request.json['teamMembers']
         value['team_name'] = request.json['team_name']
 
         for tag in value['tags']:
@@ -182,9 +182,8 @@ def submit_idea():
 @app.route('/home/ideasboard/submit-idea/result')
 def idea_submission_result():
     message = request.args.get('message')
-    idea = request.args.get('idea')
     # return render_template('idea-submission-result.html', message = message)
-    return f'<h1> message = {message} {idea} </h1>'
+    return f'<h1> message = {message}</h1>'
 
 @app.route('/home/explore-ideas')
 def explore_ideas_page():
