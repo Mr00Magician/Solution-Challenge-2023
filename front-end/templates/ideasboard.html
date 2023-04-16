@@ -173,7 +173,9 @@
 
 
       <style>
-        #add-member2 {
+
+        
+        #ad-member2 {
           width: 90px;
           height: 35px;
           padding: 0%;
@@ -354,25 +356,40 @@
           tableBody.appendChild(newRow);
         });
 
-        var submitButton = document.getElementById('idea-submission-form');
-        submitButton.addEventListener("submit", function (e) {
-          e.preventDefault();
-          fetch("./ideasboard/submit-idea", {
-            method: 'POST',
-            headers: {
-              'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-              title: document.getElementById('idea-title').value,
-              description: document.getElementById('description').value
-            })
-          }).then(function (res) {
-            if (res.ok) {
-              return res.json();
-            }
-          }).then((data) => window.location.assign(data.redirect_to))
-            .catch((error) => console.warn('Something went wrong', error))
-        });
+        const form = document.querySelector('#idea-submission-form');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  
+  const title = document.querySelector('#idea-title').value;
+  const description = document.querySelector('#description').value;
+  const tags = [...document.querySelectorAll('.tag span')].map(tag => tag.textContent.trim());
+  const teamMembers = [...document.querySelectorAll('#team-members td')].map(td => td.textContent.trim());
+  
+  const data = { title, description, tags, teamMembers };
+  
+  fetch('./ideasboard/submit-idea', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    window.location.assign(data.redirect_to);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
+
+
+
+
       </script>
       <!-- Template Main JS File -->
 </body>
