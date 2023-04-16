@@ -239,5 +239,34 @@ def add_team(idea_ID):
     refs.set_tot_teams(tot_teams + 1)
     refs.update_idea(idea_ID, team_id)
 
+@app.route('/home/explore-ideas/<team_ID>/add-members')
+def add_members(team_ID):
+    try:
+        new_members = request.json['new_members']
+
+        for member in new_members:
+            if refs.get_user(member) is None:
+                return jsonify({
+                    'error': 'yes',
+                    'message': f'user {member} does not exist!'
+                })
+        if refs.get_team(team_ID) is None:
+            return jsonify({
+                'error': 'yes',
+                'message': 'Invalid team ID!'
+            })
+        
+        refs.update_team(team_ID, new_members = new_members)
+    except Exception as e:
+        return jsonify({
+            'error': 'yes',
+            'message': 'An unexpected error occurred!Please try again.'
+        })
+    
+    return jsonify({
+        'error': 'no',
+        'message': 'Members successfully added to team!'
+    })
+    
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True)

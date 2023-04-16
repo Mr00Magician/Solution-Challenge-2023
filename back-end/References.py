@@ -86,10 +86,10 @@ class Refs:
         if description is not None:
             idea_ref.child('description').set(description, token)
     
-    def update_team(self, team, name = None, new_member = None, token = None):
+    def update_team(self, team, name = None, new_members = None, token = None):
         team_ref: pyrebase.pyrebase.Database = lambda: self.db.child('teams_info').child('teams').child(team)
-        if new_member is not None:
-            team_ref.child('members').update({new_member: new_member}, token)
+        if new_members is not None:
+            team_ref.child('members').update({new_member: new_member for new_member in new_members}, token)
         if name is not None:
             team_ref.child('name').set(name, token)
 
