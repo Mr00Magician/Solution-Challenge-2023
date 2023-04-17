@@ -148,6 +148,7 @@ def submit_idea():
         team = {
             team_id: {
                 'name': value['team_name'],
+                'team_leader': auth.current_user['displayName'],
                 'idea': idea_id,
                 'members': {x: x for x in value['users']}
             }
