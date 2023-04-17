@@ -27,6 +27,7 @@ class Refs:
             'teams': {
                 'team1': {
                     'name': 'nameless wonder',
+                    'team_leader': 'username',
                     'idea': 'idea1',
                     'members': {'MrMagician': 'MrMagician'}
                 }
