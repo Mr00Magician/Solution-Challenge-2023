@@ -114,7 +114,7 @@ def ideasboard():
         idea['tags'] = ''
         idea['users'] = ''
         
-    return render_template('ideasboard.html', user = auth.current_user, value = idea)
+    return render_template('ideasboard.html', user = auth.current_user, value = idea, categories = categories)
 
 @app.route('/home/ideasboard/submit-idea', methods = ['POST'])
 def submit_idea():
@@ -124,17 +124,17 @@ def submit_idea():
         value = dict()
         value['title'] = request.json['title']
         value['description'] = request.json['description']
-        value['tags'] = request.json['tags']
-        value['users'] = request.json['teamMembers']
-        value['team_name'] = request.json['team_name']
+        value['categories'] = request.json['categories']
+        value['team_members'] = request.json['teamMembers']
+        value['team_name'] = request.json['teamName']
 
-        for tag in value['tags']:
+        for tag in value['categories']:
             if tag not in categories:
                 return jsonify({
                     'redirect_to': '{}'.format(url_for('ideasboard', error_message = 'Invalid Tag choice!', idea =  value)),
                 })
             
-        for user in value['users']:
+        for user in value['team_members']:
             if refs.get_user(user) is None:
                 return jsonify({
                     'redirect_to': '{}'.format(url_for('ideasboard', error_message = f'User "{user}" does not exist!', idea =  value)),
@@ -150,14 +150,14 @@ def submit_idea():
                 'name': value['team_name'],
                 'team_leader': auth.current_user['displayName'],
                 'idea': idea_id,
-                'members': {x: x for x in value['users']}
+                'members': {x: x for x in value['team_members']}
             }
         }
         idea = {
             idea_id: {
                 'title': value['title'],
                 'description': value['description'],
-                'categories': value['tags'],
+                'categories': value['categories'],
                 'teams_working': {team_id: team_id}
             }
         }
@@ -168,7 +168,7 @@ def submit_idea():
         refs.set_tot_ideas(tot_ideas + 1)
 
         idea[idea_id] = {key: idea[idea_id][key] for key in idea[idea_id] if key == 'title'}
-        for category in categories:
+        for category in value['categories']:
             refs.add_in_category(category, idea)
 
     except Exception as e:
