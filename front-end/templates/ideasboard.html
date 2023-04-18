@@ -127,25 +127,30 @@
           <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
         </div>
         <div class="form-group">
-          <label for="tags">Tags:</label>
+          <label for="tags">Categories:</label>
           <div class="tag-container">
-            <label for="tag-select">Select a domain:</label>
+            <label for="tag-select">Select a category:</label>
             <select id="tag-select">
-              <option value="1">Python</option>
-              <option value="2">JavaScript</option>
-              <option value="3">HTML</option>
-              <option value="4">CSS</option>
+              {% for category in categories %}
+                <option value={{loop.index}}>{{category}}</option>
+              {% endfor %}
             </select>
             <button id="add-tag-btn">Add </button>
           </div>
           <div id="tag-list"></div>
         </div>
         <div class="form-group">
-          <label for="team members">Team Members:</label>
+          <label for="team members">Team Details:</label>
           <table>
             <thead>
-              <tr>
-                <th>Username </th>
+              <tr height="40px">
+                <td><b>Team Name:</b> <input type="text" id="team-name" placeholder="Team Name" required></td>
+              </tr>
+              <tr height="40px">
+                <td><b>Team Leader:</b> {{user['displayName']}}</td>
+              </tr>
+              <tr height="40px">
+                <td><b>Other members:</b></td>
               </tr>
             </thead>
             <tbody id="team-members">
@@ -363,10 +368,11 @@ form.addEventListener('submit', e => {
   
   const title = document.querySelector('#idea-title').value;
   const description = document.querySelector('#description').value;
-  const tags = [...document.querySelectorAll('.tag span')].map(tag => tag.textContent.trim());
+  const teamName = document.querySelector('#team-name').value;
+  const categories = [...document.querySelectorAll('.tag span')].map(tag => tag.textContent.trim());
   const teamMembers = [...document.querySelectorAll('#team-members td')].map(td => td.textContent.trim());
   
-  const data = { title, description, tags, teamMembers };
+  const data = { title, description, teamName, categories, teamMembers };
   
   fetch('./ideasboard/submit-idea', {
     method: 'POST',
