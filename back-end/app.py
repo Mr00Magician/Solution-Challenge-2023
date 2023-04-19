@@ -26,7 +26,7 @@ categories = [
 
 app = Flask(__name__, template_folder = '../front-end/templates', static_folder = '../front-end/static')
 
-value = {
+login_signup_values = {
     'email': '',
     'password': '',
     'username': '',
@@ -40,12 +40,12 @@ def login_page():
     error_message = request.args.get('error_message')
     if error_message is None:
         error_message = ''
-    return render_template('login.html', value = value, error_message = error_message)
+    return render_template('login.html', value = login_signup_values, error_message = error_message)
 
 @app.route('/login', methods = ['POST'])
 def login():
-    value['email'] = email = request.form.get('email')
-    value['password'] = password = request.form.get('password')
+    login_signup_values['email'] = email = request.form.get('email')
+    login_signup_values['password'] = password = request.form.get('password')
 
     try:
         auth.sign_in_with_email_and_password(email, password)
@@ -58,14 +58,14 @@ def create_account_page():
     error_message = request.args.get('error_message')
     if error_message is None:
         error_message = ''
-    return render_template('create-account.html', value = value, error_message = error_message)
+    return render_template('create-account.html', value = login_signup_values, error_message = error_message)
 
 @app.route('/create-account/sign-up', methods = ['POST'])
 def create_account():
-    value['email'] = email = request.form.get('email') 
-    value['username'] = username = request.form.get('username')
-    value['password'] = password = request.form.get('password')
-    value['confirm_pass'] = confirm_pass = request.form.get('confirm_pass')
+    login_signup_values['email'] = email = request.form.get('email')
+    login_signup_values['username'] = username = request.form.get('username')
+    login_signup_values['password'] = password = request.form.get('password')
+    login_signup_values['confirm_pass'] = confirm_pass = request.form.get('confirm_pass')
     
     if refs.get_user(username) is not None:
         return redirect(url_for('create_account_page', error_message = 'Username already exists'))
@@ -106,22 +106,12 @@ def home_page():
 
 @app.route('/home/ideasboard')
 def ideasboard():
-    idea = request.args.get('idea')
-    if idea is None:
-        idea = dict()
-        idea['title'] = ''
-        idea['description'] = ''
-        idea['tags'] = ''
-        idea['users'] = ''
-        
-    return render_template('ideasboard.html', user = auth.current_user, value = idea, categories = categories)
+    return render_template('ideasboard.html', user = auth.current_user, categories = categories)
 
 @app.route('/home/ideasboard/submit-idea', methods = ['POST'])
 def submit_idea():
-    # Checks Needed:
-    # Check if condition for adding only existing users to the default team for this idea works.
     try:
-        value = dict()
+        value = {}
         value['title'] = request.json['title']
         value['description'] = request.json['description']
         value['categories'] = request.json['categories']
@@ -131,13 +121,15 @@ def submit_idea():
         for tag in value['categories']:
             if tag not in categories:
                 return jsonify({
-                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = 'Invalid Tag choice!', idea =  value)),
+                    'error': True,
+                    'message': 'Invalid Tag choice!'
                 })
             
         for user in value['team_members']:
             if refs.get_user(user) is None:
                 return jsonify({
-                    'redirect_to': '{}'.format(url_for('ideasboard', error_message = f'User "{user}" does not exist!', idea =  value)),
+                    'error': True,
+                    'message': f'User "{user}" does not exist!'
                 })
         
         tot_teams = refs.get_tot_teams()
@@ -173,11 +165,13 @@ def submit_idea():
 
     except Exception as e:
         return jsonify({
-            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'An Error Occurred! Please try again.')),
+            'error': True,
+            'message': 'An Error Occurred! Please try again.'
         })
     
     return jsonify({
-            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'Idea Submitted Successfully!')),
+            'error': False,
+            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'Idea Submitted Successfully!'))
         })
 
 @app.route('/home/ideasboard/submit-idea/result')
@@ -208,11 +202,11 @@ def get_idea_info(idea_ID):
 
 @app.route('/home/explore-ideas/<idea_ID>/add-team/')
 def add_team(idea_ID):
-    team_info = dict()
+    team_info = {}
     team_info['name'] = request.json['name']
     team_info['members'] = request.json['members']
 
-    for member in value['members']:
+    for member in team_info['members']:
         if refs.get_user(member) is None:
             return jsonify({
                 'error': 'yes',
@@ -229,7 +223,7 @@ def add_team(idea_ID):
 
     team = {
         team_id: {
-            'name': value['team_name'],
+            'name': team_info['team_name'],
             'idea': idea_ID,
             'members': {x: x for x in team_info['members']}
         }
