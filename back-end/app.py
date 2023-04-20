@@ -166,19 +166,19 @@ def submit_idea():
     except Exception as e:
         return jsonify({
             'error': True,
-            'message': 'An Error Occurred! Please try again.'
+            'message': 'An Error Occurred! Please try again. Log out and log in again if the error persists '
         })
     
     return jsonify({
             'error': False,
-            'redirect_to': '{}'.format(url_for('idea_submission_result', message = 'Idea Submitted Successfully!'))
+            'message': 'Idea Submitted Successfully!'
         })
 
-@app.route('/home/ideasboard/submit-idea/result')
-def idea_submission_result():
-    message = request.args.get('message')
-    # return render_template('idea-submission-result.html', message = message)
-    return f'<h1> message = {message}</h1>'
+# @app.route('/home/ideasboard/submit-idea/result')
+# def idea_submission_result():
+#     message = request.args.get('message')
+#     return render_template('idea-submission-result.html', message = message, user = auth.current_user)
+#     # return f'<h1> message = {message}</h1>'
 
 @app.route('/home/explore-ideas')
 def explore_ideas_page():
