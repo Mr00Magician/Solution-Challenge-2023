@@ -169,6 +169,7 @@
 
         </div>
         <br>
+        <h5 id="error-message" style="color: rgb(253, 51, 32);"></h5>
         <button type="submit" id="submitbutton">Submit</button><br><br><br>
       </form>
 
@@ -365,6 +366,9 @@
 
 form.addEventListener('submit', e => {
   e.preventDefault();
+  const err_element = document.getElementById('error-message');
+  err_element.style.color = 'black';
+  err_element.innerText = 'Please wait...'
   
   const title = document.querySelector('#idea-title').value;
   const description = document.querySelector('#description').value;
@@ -386,7 +390,12 @@ form.addEventListener('submit', e => {
     return response.json();
   })
   .then(data => {
-    window.location.assign(data.redirect_to);
+    if (data.error){
+      err_element.innerText = data.message;
+      err_element.style.color = 'red';
+    } else {
+      err_element.innerText = data.message;
+    }
   })
   .catch(error => {
     console.error('Error:', error);

@@ -3,3 +3,4 @@ firebase_tester.py
 .env
 ServiceAccountPrivateKey.json
 Changes.txt
+/__pycache__
