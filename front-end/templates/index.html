@@ -45,596 +45,500 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  
+
 </head>
 
 <body>
   <!-- ======= Header ======= -->
-  <div class="nav">
-    <input type="checkbox" id="nav-check">
-    <div class="nav-header">
-      <div class="nav-title">
-        IdeaVerse
-      </div>
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img src="../static/assets/img/logo.png" alt="">
+
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html"><b>Home</b></a></li>
+          <li><a href="about.html"><b>About</b></a></li>
+          <li><a href="about.html"><b>Contact Us</b></a></li>
+          <li class="dropdown"><a href="#"><span>{{user['displayName']}}</span> <i
+                class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="profile-index.html">View Proile</a></li>
+              <li><a href="#">Log Out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav><!-- .navbar -->
+
     </div>
-    <div class="nav-btn">
-      <label for="nav-check">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
+
+  </header>
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+    <div class="container">
+      <br class="row gy-4 d-flex justify-content-between">
+      <br class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+      <h2 data-aos="fade-up">Welcome to IdeaVerse!!</h2>
+      <p class="next" data-aos="fade-up" data-aos-delay="100">A platform where you can collaborate with others to work
+        on an idea!</p>
+      <br></br>
+      <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+        <input type="text" class="form-control" placeholder="Look for an idea" style="color: white;">
+        <button type="submit" class="btn"><i class="material-icons">search</i></button>
+      </form>
+
+      <br class="row gy-2" data-aos="fade-up" data-aos-delay="400">
+      <br></br>
+      <div class="col-lg-2 col-6">
+        <div class="stats-item text-center w-100 h-100">
+          <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
+            class="purecounter"></span>
+          <p>Users</p>
+        </div>
+      </div><!-- End Stats Item -->
+
+      <div class="col-lg-2 col-6">
+        <div class="stats-item text-center w-100 h-100">
+          <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
+            class="purecounter"></span>
+          <p>Projects</p>
+        </div>
+      </div><!-- End Stats Item -->
+
+      <div class="col-lg-2 col-6">
+        <div class="stats-item text-center w-100 h-100">
+          <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1"
+            class="purecounter"></span>
+          <p>Ideas</p>
+        </div>
+      </div><!-- End Stats Item -->
+
+      <div class="col-lg-2 col-6">
+        <div class="stats-item text-center w-100 h-100">
+          <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1"
+            class="purecounter"></span>
+          <p>Teams</p>
+        </div>
+      </div><!-- End Stats Item -->
+
     </div>
-    
-    <div class="nav-links">
-      <a href="//github.io/jo_geek" target="_blank">Github</a>
-      <a href="http://stackoverflow.com/users/4084003/" target="_blank">Stackoverflow</a>
-      <a href="https://in.linkedin.com/in/jonesvinothjoseph" target="_blank">LinkedIn</a>
-      <a href="https://codepen.io/jo_Geek/" target="_blank">Codepen</a>
-      <a href="https://jsfiddle.net/user/jo_Geek/" target="_blank">JsFiddle</a>
     </div>
-    <div> 
-      <div class="nav-user">
-      <a href="#" class="nav-user-icon"><i class="fa fa-user" style="color: white;"></i></a>
-      <div class="nav-user-dropdown">
-        <a href="#">Profile</a>
-        <a href="#">Settings</a>
-        <a href="#">Logout</a>
-      </div>
+
+
+
     </div>
     </div>
-  </div>
-    
-  
-  </div>
-  
+  </section><!-- End Hero Section -->
 
+  <main id="main">
+    <section id="service" class="services pt-0">
+      <div class="container" data-aos="fade-up">
 
-    <!-- End Header -->
-
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="hero d-flex align-items-center">
-      <div class="container">
-        <br class="row gy-4 d-flex justify-content-between">
-        <br class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-        <h2 data-aos="fade-up">Welcome to IdeaVerse!!</h2>
-        <p class="next" data-aos="fade-up" data-aos-delay="100">A platform where you can collaborate with others to work
-          on an idea!</p>
-        <br></br>
-        <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
-          <input type="text" class="form-control" placeholder="Look for an idea" style="color: white;">
-          <button type="submit" class="btn"><i class="material-icons">search</i></button>
-        </form>
-
-        <br class="row gy-2" data-aos="fade-up" data-aos-delay="400">
-        <br></br>
-        <div class="col-lg-2 col-6">
-          <div class="stats-item text-center w-100 h-100">
-            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
-              class="purecounter"></span>
-            <p>Users</p>
-          </div>
-        </div><!-- End Stats Item -->
-
-        <div class="col-lg-2 col-6">
-          <div class="stats-item text-center w-100 h-100">
-            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
-              class="purecounter"></span>
-            <p>Projects</p>
-          </div>
-        </div><!-- End Stats Item -->
-
-        <div class="col-lg-2 col-6">
-          <div class="stats-item text-center w-100 h-100">
-            <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1"
-              class="purecounter"></span>
-            <p>Ideas</p>
-          </div>
-        </div><!-- End Stats Item -->
-
-        <div class="col-lg-2 col-6">
-          <div class="stats-item text-center w-100 h-100">
-            <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1"
-              class="purecounter"></span>
-            <p>Teams</p>
-          </div>
-        </div><!-- End Stats Item -->
-
-      </div>
-      </div>
-
-
-
-      </div>
-      </div>
-    </section><!-- End Hero Section -->
-
-    <main id="main">
-      <section id="service" class="services pt-0">
-        <div class="container" data-aos="fade-up">
-
-          <div class="section-header">
-            <span>Our Services</span>
-            <h2>Our Services</h2>
-
-          </div>
-
-          <div class="row gy-4">
-
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <div class="card">
-                <div class="card-img">
-                  <img src="../static/assets/img/Team.jpg" alt="" class="img-fluid" width="500px" height="600px">
-                </div>
-                <h3><a href="service-details.html" class="stretched-link">TEAM UP</a></h3>
-                <p>Team up with people who match your skillset and enthusiasm and get started with your project </p>
-              </div>
-            </div><!-- End Card Item -->
-
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <div class="card">
-                <div class="card-img">
-                  <img src="../static/assets/img/ideas.jpg" alt="" class="img-fluid">
-                </div>
-                <h3><a href="service-details.html" class="stretched-link">IDEAS</a></h3>
-                <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt molestiae
-                  dolor ipsam ducimus occaecati nisi</p>
-              </div>
-            </div><!-- End Card Item -->
-
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-              <div class="card">
-                <div class="card-img">
-                  <img src="../static/assets/img/browse.jpg" alt="" class="img-fluid">
-                </div>
-                <h3><a href="service-details.html" class="stretched-link">BROWSE</a></h3>
-                <p>Find the existing ideas posted by experts already and start working on it.</p>
-              </div>
-            </div><!-- End Card Item -->
-
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-              <div class="card">
-                <div class="card-img">
-                  <img src="../static/assets/img/.jpg" alt="" class="img-fluid">
-                </div>
-                <h3><a href="service-details.html" class="stretched-link">Trucking</a></h3>
-                <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque
-                  oluptatem
-                  aut et molestiae ut et nihil</p>
-              </div>
-            </div><!-- End Card Item -->
-
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-              <div class="card">
-                <div class="card-img">
-                  <img src="../static/assets/img/packaging-service.jpg" alt="" class="img-fluid">
-                </div>
-                <h3><a href="service-details.html" class="stretched-link">Packaging</a></h3>
-                <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur maiores
-                  beatae consequatur magni voluptates</p>
-              </div>
-            </div><!-- End Card Item -->
-
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-              <div class="card">
-                <div class="card-img">
-                  <img src="../static/assets/img/warehousing-service.jpg" alt="" class="img-fluid">
-                </div>
-                <h3><a href="service-details.html" class="stretched-link">Warehousing</a></h3>
-                <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi quisquam aut
-                  nostrum unde et qui est non quo nulla</p>
-              </div>
-            </div><!-- End Card Item -->
-
-          </div>
-      </section><!-- End Services Section -->
-      </div>
-      <!-- ======= Featured Services Section ======= -->
-      <section id="featured-services" class="featured-services">
-        <div class="container">
-
-          <div class="row gy-4">
-
-            <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up">
-              <div class="icon flex-shrink-0"><i class='bx bxs-bulb' style="color:rgb(53, 60, 78)"></i></div>
-              <div>
-                <h4 class="title">Post an Idea</h4>
-                <p class="description">Got an idea? Looking for people with the right skills? Form a team with people of
-                  right
-                  skillset</p>
-                <a href="./home/ideasboard" class="readmore stretched-link"><span>Learn More</span><i
-                    class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-            <!-- End Service Item -->
-
-            <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon flex-shrink-0"><i class='bx bxs-group' style="color: rgb(53, 60, 78)"></i></div>
-              <div>
-                <h4 class="title">Collaborate</h4>
-                <p class="description">Want to join a team? Look for people working on fun projects and collaborate with
-                  them!!</p>
-                <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i
-                    class="bi bi-arrow-right"></i></a>
-              </div>
-            </div><!-- End Service Item -->
-
-            <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon flex-shrink-0"><i class='bx bx-list-ul' style="color:rgb(53, 60, 78)"></i></div>
-              <div>
-                <h4 class="title">Key Points</h4>
-                <p class="description">Confused on what to work? We got you! Here's a list of ideas that you can work
-                  on. Hop onto your PC and get started!</p>
-                <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i
-                    class="bi bi-arrow-right"></i></a>
-              </div>
-            </div><!-- End Service Item -->
-
-          </div>
+        <div class="section-header">
+          <span>Our Services</span>
+          <h2>Our Services</h2>
 
         </div>
-      </section><!-- End Featured Services Section -->
 
-      <!-- ======= About Us Section ======= -->
-      <section id="about" class="about pt-0">
-        <div class="container" data-aos="fade-up">
-
-          <div class="row gy-4">
-            <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
-              <img src="../static/assets/img/about.jpg" class="img-fluid" alt="">
-              <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
-            </div>
-            <div class="col-lg-6 content order-last  order-lg-first">
-              <h3>About Us</h3>
-              <p>
-                This is a place where creativity and innovation can thrive, and where
-                you can connect with like-minded individuals who share your passion for bringing new ideas to life.
-              </p>
-              <ul>
-                <li data-aos="fade-up" data-aos-delay="100">
-                  <i class='bx bx-signal-4'></i>
-                  <div>
-                    <h5>Connect with like-minded people</h5>
-                    <p>Our platform makes it easy for you to connect with those who share your vision</p>
-                  </div>
-                </li>
-                <li data-aos="fade-up" data-aos-delay="200">
-                  <i class='bx bx-network-chart'></i>
-                  <div>
-                    <h5>Collaborate</h5>
-                    <p>Power of collaboration is unstoppable, and we are committed to facilitating that process.</p>
-                  </div>
-                </li>
-                <li data-aos="fade-up" data-aos-delay="300">
-                  <i class='bx bxs-planet'></i>
-                  <div>
-                    <h5>Life changing ideas</h5>
-                    <p>Join our platform and be part of a community that will inspire, challenge and support you on your
-                      journey towards creating a better future. Together, we can make a difference!</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </section><!-- End About Us Section -->
-
-      <!-- ======= Services Section ======= -->
-
-
-
-      <!-- ======= Call To Action Section ======= -->
-      <section id="call-to-action" class="call-to-action">
-        <div class="container" data-aos="zoom-out">
-
-          <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-              <h3>Call To Action</h3>
-              <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.</p>
-              <a class="cta-btn" href="#">Call To Action</a>
-            </div>
-          </div>
-
-        </div>
-      </section><!-- End Call To Action Section -->
-
-      <!-- ======= Features Section ======= -->
-      <section id="features" class="features">
-        <div class="container">
-
-          <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
-
-            <div class="col-md-5">
-              <img src="../static/assets/img/features-1.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-7">
-              <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-              <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore
-                magna aliqua.
-              </p>
-              <ul>
-                <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="bi bi-check"></i> Ullam est qui quos consequatur eos accusamus.</li>
-              </ul>
-            </div>
-          </div><!-- Features Item -->
-
-          <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
-            <div class="col-md-5 order-1 order-md-2">
-              <img src="../static/assets/img/features-2.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-7 order-2 order-md-1">
-              <h3>Corporis temporibus maiores provident</h3>
-              <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore
-                magna aliqua.
-              </p>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                in
-                culpa qui officia deserunt mollit anim id est laborum
-              </p>
-            </div>
-          </div><!-- Features Item -->
-
-          <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
-            <div class="col-md-5">
-              <img src="../static/assets/img/features-3.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-7">
-              <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
-              <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut
-                quia voluptatem hic voluptas dolor doloremque.</p>
-              <ul>
-                <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="bi bi-check"></i> Facilis ut et voluptatem aperiam. Autem soluta ad fugiat.</li>
-              </ul>
-            </div>
-          </div><!-- Features Item -->
-
-          <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
-            <div class="col-md-5 order-1 order-md-2">
-              <img src="../static/assets/img/features-4.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-7 order-2 order-md-1">
-              <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
-              <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore
-                magna aliqua.
-              </p>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                in
-                culpa qui officia deserunt mollit anim id est laborum
-              </p>
-            </div>
-          </div><!-- Features Item -->
-
-        </div>
-      </section><!-- End Features Section -->
-
-     
-
-      <!-- ======= Testimonials Section ======= -->
-      <section id="testimonials" class="testimonials">
-        <div class="container">
-
-          <div class="slides-1 swiper" data-aos="fade-up">
-            <div class="swiper-wrapper">
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="../static/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.
-                    Accusantium
-                    quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div><!-- End testimonial item -->
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="../static/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis
-                    quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div><!-- End testimonial item -->
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="../static/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim
-                    tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div><!-- End testimonial item -->
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="../static/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit
-                    minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div><!-- End testimonial item -->
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="../static/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim
-                    culpa
-                    labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div><!-- End testimonial item -->
-
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-
-        </div>
-      </section><!-- End Testimonials Section -->
-
-   
-
-    </main><!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-
-      <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-5 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <span>Logis</span>
-            </a>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
-              darta
-              donna mare fermentum iaculis eu non diam phasellus.</p>
-            <div class="social-links d-flex mt-4">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="card">
+              <div class="card-img">
+                <img src="../static/assets/img/Team.jpg" alt="" class="img-fluid" width="500px" height="600px">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">TEAM UP</a></h3>
+              <p>Team up with people who match your skillset and enthusiasm and get started with your project </p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="card">
+              <div class="card-img">
+                <img src="../static/assets/img/ideas.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">IDEAS</a></h3>
+              <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt molestiae
+                dolor ipsam ducimus occaecati nisi</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="card">
+              <div class="card-img">
+                <img src="../static/assets/img/browse.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">BROWSE</a></h3>
+              <p>Find the existing ideas posted by experts already and start working on it.</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="card">
+              <div class="card-img">
+                <img src="../static/assets/img/.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">Trucking</a></h3>
+              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque
+                oluptatem
+                aut et molestiae ut et nihil</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="card">
+              <div class="card-img">
+                <img src="../static/assets/img/packaging-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">Packaging</a></h3>
+              <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur maiores
+                beatae consequatur magni voluptates</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="card">
+              <div class="card-img">
+                <img src="../static/assets/img/warehousing-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">Warehousing</a></h3>
+              <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi quisquam aut
+                nostrum unde et qui est non quo nulla</p>
+            </div>
+          </div><!-- End Card Item -->
+
+        </div>
+    </section><!-- End Services Section -->
+    </div>
+    <!-- ======= Featured Services Section ======= -->
+    <section id="featured-services" class="featured-services">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up">
+            <div class="icon flex-shrink-0"><i class='bx bxs-bulb' style="color:rgb(53, 60, 78)"></i></div>
+            <div>
+              <h4 class="title">Post an Idea</h4>
+              <p class="description">Got an idea? Looking for people with the right skills? Form a team with people of
+                right
+                skillset</p>
+              <a href="./home/ideasboard" class="readmore stretched-link"><span>Learn More</span><i
+                  class="bi bi-arrow-right"></i></a>
             </div>
           </div>
+          <!-- End Service Item -->
 
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Terms of service</a></li>
-              <li><a href="#">Privacy policy</a></li>
-            </ul>
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon flex-shrink-0"><i class='bx bxs-group' style="color: rgb(53, 60, 78)"></i></div>
+            <div>
+              <h4 class="title">Collaborate</h4>
+              <p class="description">Want to join a team? Look for people working on fun projects and collaborate with
+                them!!</p>
+              <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i
+                  class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon flex-shrink-0"><i class='bx bx-list-ul' style="color:rgb(53, 60, 78)"></i></div>
+            <div>
+              <h4 class="title">Key Points</h4>
+              <p class="description">Confused on what to work? We got you! Here's a list of ideas that you can work
+                on. Hop onto your PC and get started!</p>
+              <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i
+                  class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+    </section><!-- End Featured Services Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about pt-0">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+          <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
+            <img src="../static/assets/img/about.jpg" class="img-fluid" alt="">
+            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
           </div>
-
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><a href="#">Web Design</a></li>
-              <li><a href="#">Web Development</a></li>
-              <li><a href="#">Product Management</a></li>
-              <li><a href="#">Marketing</a></li>
-              <li><a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-            <h4>Contact Us</h4>
+          <div class="col-lg-6 content order-last  order-lg-first">
+            <h3>About Us</h3>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              This is a place where creativity and innovation can thrive, and where
+              you can connect with like-minded individuals who share your passion for bringing new ideas to life.
             </p>
+            <ul>
+              <li data-aos="fade-up" data-aos-delay="100">
+                <i class='bx bx-signal-4'></i>
+                <div>
+                  <h5>Connect with like-minded people</h5>
+                  <p>Our platform makes it easy for you to connect with those who share your vision</p>
+                </div>
+              </li>
+              <li data-aos="fade-up" data-aos-delay="200">
+                <i class='bx bx-network-chart'></i>
+                <div>
+                  <h5>Collaborate</h5>
+                  <p>Power of collaboration is unstoppable, and we are committed to facilitating that process.</p>
+                </div>
+              </li>
+              <li data-aos="fade-up" data-aos-delay="300">
+                <i class='bx bxs-planet'></i>
+                <div>
+                  <h5>Life changing ideas</h5>
+                  <p>Join our platform and be part of a community that will inspire, challenge and support you on your
+                    journey towards creating a better future. Together, we can make a difference!</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+
+
+
+    <!-- ======= Call To Action Section ======= -->
+    <section id="call-to-action" class="call-to-action">
+      <div class="container" data-aos="zoom-out">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h3>Contact Us </h3>
+            <p> Stuck? Need help? We're always happy to serve you! Just fill in this form and we'll get back to you!</p>
+            <a class="cta-btn" href="mailto:aarushee002@gmail.com">Send an email</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Call To Action Section -->
+
+
+
+
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+
+        <div class="slides-1 swiper" data-aos="fade-up">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="../static/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <h3>Saul Goodman</h3>
+                <h4>Ceo &amp; Founder</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.
+                  Accusantium
+                  quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="../static/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <h4>Designer</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis
+                  quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="../static/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <h4>Store Owner</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim
+                  tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="../static/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <h4>Freelancer</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit
+                  minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="../static/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <h4>Entrepreneur</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim
+                  culpa
+                  labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
 
           </div>
-
+          <div class="swiper-pagination"></div>
         </div>
+
       </div>
+    </section><!-- End Testimonials Section -->
 
-      <div class="container mt-4">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Logis</span></strong>. All Rights Reserved
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Logis</span>
+          </a>
+          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
+            darta
+            donna mare fermentum iaculis eu non diam phasellus.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
         </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
         </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>
+            A108 Adam Street <br>
+            New York, NY 535022<br>
+            United States <br><br>
+            <strong>Phone:</strong> +1 5589 55488 55<br>
+            <strong>Email:</strong> info@example.com<br>
+          </p>
+
+        </div>
+
       </div>
+    </div>
 
-    </footer><!-- End Footer -->
-    <!-- End Footer -->
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Logis</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
 
-    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
 
-    <div id="preloader"></div>
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Vendor JS Files -->
-    <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="../static/assets/vendor/aos/aos.js"></script>
-    <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+  <div id="preloader"></div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"></script>
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="../static/assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
 
 </body>
 
