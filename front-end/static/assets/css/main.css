@@ -1947,10 +1947,10 @@ select {
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  width: 90%;
-  background-image: url("../img/bgphoto.png");
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/my-life-through-a-lens.png");
   background-size:cover;
-  background-position:right;
   position:relative;
   padding: 120px 0 60px 0;
 }
