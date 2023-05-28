@@ -17,6 +17,7 @@
 
 body {
   margin: 0px;
+  overflow-x: hidden;
   font-family: 'segoe ui';
 }
 
@@ -407,7 +408,7 @@ section {
 .header {
   transition: all 0.5s;
   z-index: 997;
-  padding: 30px 0;
+  padding: 10px 0;
 }
 
 .header.sticked {
@@ -436,6 +437,7 @@ section {
   .navbar {
     padding: 0;
     color: #000000;
+    margin-bottom: 0px;
   }
 
   .navbar ul {
@@ -549,6 +551,10 @@ section {
     left: 100%;
     visibility: visible;
   }
+}
+#navbar-heading {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 35px;
 }
 
 @media (min-width: 1280px) and (max-width: 1366px) {
