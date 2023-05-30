@@ -1947,13 +1947,16 @@ select {
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
+  background-size: cover;
+  background-image: url("../img/my-life-through-a-lens.png");
+  background-position: center;
+  position: relative;
+  background-repeat: no-repeat;
   width: 100vw;
   height: 100vh;
-  background-image: url("../img/my-life-through-a-lens.png");
-  background-size:cover;
-  position:relative;
-  padding: 120px 0 60px 0;
+  overflow: hidden;
 }
+
 
 .hero h2 {
   margin-bottom: 20px;
