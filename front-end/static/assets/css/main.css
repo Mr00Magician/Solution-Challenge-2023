@@ -15,6 +15,17 @@
   box-sizing: border-box;
 }
 
+@keyframes slideInFromDown {
+  0% {
+      visibility: hidden;
+      transform: translateY(100%);
+  }
+  100% {
+    visibility: visible;
+    transform: translateY(0);
+}
+}
+
 body {
   margin: 0px;
   overflow-x: hidden;
@@ -409,6 +420,9 @@ section {
   transition: all 0.5s;
   z-index: 997;
   padding: 10px 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  margin: 0, 20px;
+  box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 1);
 }
 
 .header.sticked {
@@ -573,6 +587,33 @@ section {
   .mobile-nav-hide {
     display: none;
   }
+}
+
+.hero-welcome-msg {
+  animation: 1s ease-out 0s 1 slideInFromDown;
+  animation-fill-mode: both;
+  background-color: rgba(30, 30, 30, 0.6);
+  border-radius: 20px;
+  bottom: 0px;
+  box-shadow: 6px 8px 15px rgb(0, 0, 0), -2px -2px 10px rgb(0, 0, 0);
+  color: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+  left: 30vw;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  position: absolute;
+  text-align: center;
+  width: 40vw;
+}
+
+.hero-welcome-msg h2 {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.hero-welcome-msg p {
+  font-size: 18px;
+  margin-bottom: 0px;
 }
 
 /*--------------------------------------------------------------
@@ -1959,14 +2000,6 @@ select {
   background-size:cover;
   position:relative;
   padding: 120px 0 60px 0;
-}
-
-.hero h2 {
-  margin-bottom: 20px;
-  padding: 0;
-  font-size: 48px;
-  font-weight: 700;
-  color: #000000;
 }
 
 @media (max-width: 575px) {
