@@ -174,7 +174,7 @@ section {
 
 .section-header {
   text-align: center;
-  padding: 30px 0;
+
   position: relative;
 }
 
@@ -1995,7 +1995,7 @@ select {
 --------------------------------------------------------------*/
 .hero {
   background-size: cover;
-  background-image: url("../img/Hero\ Section\ Image.png");
+  background-image: url("../img/HeroSectionImageFinal.png");
   background-position: center;
   position: relative;
   background-repeat: no-repeat;
