@@ -46,6 +46,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
+
 </head>
 
 <body>
@@ -72,15 +73,53 @@
       </nav><!-- .navbar -->
 
     </div>
+<style> 
 
+.search-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 300px;
+      margin-left: 60px;
+      
+    }
+
+    .search-input {
+      border: rgb(18, 18, 18);
+      border-radius: 15px;
+      padding: 10px 15px;
+      background-color: #FFBA00;
+      color: rgb(52, 44, 44);
+      font-size: 16px;
+      width: 400px;
+    }
+
+    .search-button {
+      background-color: #FFBA00;
+      color: black;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 15px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+</style>
   </header>
   <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero d-flex align-items-center">
-   
-      
-      <!-- <br class="row gy-2" data-aos="fade-up" data-aos-delay="400">
+    
+    <div class="search-bar" style="position:relative;">
+      <input id="search-input" type="search" class="search-input" placeholder="Look for an idea" />
+      <button id="search-button" type="button" class="search-button">
+        <i class="fa fa-search" style="font-size:23px"></i>
+      </button>
+    </div>
+ 
+
+
+    <!-- <br class="row gy-2" data-aos="fade-up" data-aos-delay="400">
       <br></br>
       <div class="col-lg-2 col-6">
         <div class="stats-item text-center w-100 h-100">
@@ -105,7 +144,7 @@
           <p>Teams</p>
         </div>
       </div> -->
-    </div>
+    
   </section><!-- End Hero Section -->
 
   <main id="main">
