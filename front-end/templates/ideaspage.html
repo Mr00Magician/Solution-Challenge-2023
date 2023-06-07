@@ -30,9 +30,20 @@
     <link href="../static/assets/css/ideaspage.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="../static/assets/css/main.css" rel="stylesheet">
+    <script>
+        // AJAX request functions...
+
+        $(document).ready(function() {
+            // Fetch ideas on page load or button click
+            fetchIdeas('Technology');
+        });
+    </script>
 </head>
 
 <body>
+    <div id="ideas-container">
+        <!-- Ideas will be dynamically added here -->
+    </div>
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -112,7 +123,7 @@
                 </div>
             </nav>
 
-            <h2>Collapsible Sidebar Using Bootstrap 4</h2>
+            <h2></h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                 ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
@@ -164,8 +175,79 @@
 
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Function to fetch ideas from a specific category
+        function fetchIdeas(category) {
+            $.ajax({
+                url: '/home/explore-ideas/' + category,
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    var ideas = response.ideas;
+                    var ideasContainer = $('#ideas-container');
+
+                    // Clear previous content
+                    ideasContainer.empty();
+
+                    // Iterate through the fetched ideas and display them
+                    for (var i = 0; i < ideas.length; i++) {
+                        var idea = ideas[i];
+                        var ideaHtml = '<div class="idea">' +
+                            '<h2>' + idea.title + '</h2>' +
+                            '<p>' + idea.description + '</p>' +
+                            '<ul>';
+
+                        // Iterate through categories of the idea
+                        for (var j = 0; j < idea.categories.length; j++) {
+                            ideaHtml += '<li>' + idea.categories[j] + '</li>';
+                        }
+
+                        ideaHtml += '</ul>' +
+                            '</div>';
+
+                        // Append the idea HTML to the container
+                        ideasContainer.append(ideaHtml);
+                    }
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+
+        // Function to fetch details of a specific idea
+        function fetchIdea(ideaId) {
+            $.ajax({
+                url: '/home/explore-ideas/' + ideaId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    var idea = response.idea;
+                    // Process the idea details as required
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+    </script>
+    </head>
+
+    <body>
+        <div id="ideas-container">
+            <!-- Ideas will be dynamically added here -->
+        </div>
+
+        <button onclick="fetchIdeas('Technology')">Fetch Ideas</button>
+
+        <script>
+            // Example usage
+            fetchIdeas('Technology');
+            fetchIdea('idea123'); // Replace 'idea123' with the actual idea ID
+        </script>
 
 
-</body>
+    </body>
 
 </html>
