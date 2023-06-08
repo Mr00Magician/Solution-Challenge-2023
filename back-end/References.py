@@ -6,8 +6,10 @@ class Refs:
             'total_users': 1, 
             'users': {
                 'username': {
+                    'name': 'name_of_user',
                     'email':'meanasnadeem@gmail.com',
-                    'ideas_posted': {'idea1': 'idea1'}
+                    'ideas_posted': {'idea1': 'idea1'},
+                    'teams': {'team1': 'team1'}
                 }
             }
         },
@@ -78,8 +80,15 @@ class Refs:
         self.db.child('teams_info').child('teams').update(team, token)
 
     
+    def update_user(self, username, team_ID = None, name = None, token = None):
+        user_ref: pyrebase.pyrebase.Database = self.db.child('users_info').child('users').child(username)
+        if team_ID is not None:
+            user_ref.child('teams').update({team_ID: team_ID}, token)
+        if name is not None:
+            user_ref.child('name').set(name, token)
+
     def update_idea(self, idea, team_ID = None, title = None, description = None, token = None):
-        idea_ref: pyrebase.pyrebase.Database = lambda: self.db.child('ideas_info').child('ideas').child(idea)
+        idea_ref: pyrebase.pyrebase.Database = self.db.child('ideas_info').child('ideas').child(idea)
         if team_ID is not None:
             idea_ref.child('teams_working').update({team_ID: team_ID}, token)
         if title is not None:
@@ -88,13 +97,13 @@ class Refs:
             idea_ref.child('description').set(description, token)
     
     def update_team(self, team, name = None, new_members = None, token = None):
-        team_ref: pyrebase.pyrebase.Database = lambda: self.db.child('teams_info').child('teams').child(team)
+        team_ref: pyrebase.pyrebase.Database = self.db.child('teams_info').child('teams').child(team)
         if new_members is not None:
             team_ref.child('members').update({new_member: new_member for new_member in new_members}, token)
         if name is not None:
             team_ref.child('name').set(name, token)
 
-    
+  
     def get_tot_users(self, token = None):
         return self.db.child('users_info').child('total_users').get(token).val()
     

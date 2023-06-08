@@ -118,6 +118,11 @@ def submit_idea():
         value['team_members'] = request.json['teamMembers']
         value['team_name'] = request.json['teamName']
 
+        tot_teams = refs.get_tot_teams()
+        tot_ideas = refs.get_tot_ideas()
+        team_id = f'team{tot_teams + 1}'
+        idea_id = f'idea{tot_ideas + 1}'
+
         for tag in value['categories']:
             if tag not in categories:
                 return jsonify({
@@ -131,11 +136,8 @@ def submit_idea():
                     'error': True,
                     'message': f'User "{user}" does not exist!'
                 })
-        
-        tot_teams = refs.get_tot_teams()
-        tot_ideas = refs.get_tot_ideas()
-        team_id = f'team{tot_teams + 1}'
-        idea_id = f'idea{tot_ideas + 1}'
+            refs.update_user(user, team_id)
+        refs.update_user(auth.current_user['displayName'], team_id)
 
         team = {
             team_id: {

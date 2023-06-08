@@ -52,12 +52,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="../static/assets/img/logo.png" alt="">
-        
-      </a>
-
+      <h1 id="navbar-heading">IdeaVerse</h1>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
@@ -169,6 +164,7 @@
 
         </div>
         <br>
+        <h5 id="submit-status" style="padding-left: 10px;"></h5>
         <button type="submit" id="submitbutton">Submit</button><br><br><br>
       </form>
 
@@ -365,7 +361,10 @@
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  
+  const submitStatus = document.getElementById('submit-status');
+  submitStatus.style.color = 'black';
+  submitStatus.innerText = 'Please wait...'
+
   const title = document.querySelector('#idea-title').value;
   const description = document.querySelector('#description').value;
   const teamName = document.querySelector('#team-name').value;
@@ -386,7 +385,11 @@ form.addEventListener('submit', e => {
     return response.json();
   })
   .then(data => {
-    window.location.assign(data.redirect_to);
+    if (!data.error)
+      submitStatus.innerText = data.message;
+    else
+      submitStatus.style.color = 'red';
+      submitStatus.innerText = data.message;
   })
   .catch(error => {
     console.error('Error:', error);
